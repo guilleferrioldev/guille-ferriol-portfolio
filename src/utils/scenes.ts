@@ -6,12 +6,12 @@ type SceneType = {
 
 export const scenes: SceneType[] = [
     {
-      path: "models/cybertruck_scene.glb",
+      path: "models/about_me_scene.glb",
       mainColor: "#f9c0ff",
       name: "ABOUT ME",
     },
     {
-      path: "models/model3_scene.glb",
+      path: "",
       mainColor: "#c0ffe1",
       name: "EXPERIENCE AND PROJECTS",
     },

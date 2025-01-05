@@ -70,8 +70,6 @@ const Header = () => {
               />
             </svg>
           </div>
-          <div className="bg-gradient-to-t from-white/90 pt-20 pb-10 p-4 flex items-center flex-col text-center">
-          </div>
         </div>
     );
   };
