@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         "my-pink": "#f9c0ff",
-        "my-blue": "#b3e5fc",
+        "my-blue": "#6c97ab",
         "my-orange": "#ffdec0",
       }
     },

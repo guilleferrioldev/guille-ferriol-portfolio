@@ -3,7 +3,7 @@ export type SceneType = {
   name: string;
 };
 
-export const scenes: SceneType[] = [
+export const scenes = <SceneType[]>[
     {
       mainColor: "#f9c0ff",
       name: "ABOUT ME AND THE THINGS I LOVE",
