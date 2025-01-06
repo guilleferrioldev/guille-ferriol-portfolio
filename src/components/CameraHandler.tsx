@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import {  useEffect, useRef } from "react";
-import { slideAtom } from "./Header";
+import { slideAtom } from "./Overlay";
 import { useControls } from "leva";
 import { useThree } from "@react-three/fiber";
 import {

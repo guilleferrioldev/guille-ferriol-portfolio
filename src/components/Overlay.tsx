@@ -1,10 +1,11 @@
 import { atom, useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { scenes } from "../utils/scenes";
+import { ExperiencePage, SkillsPage } from "../pages";
 
 export const slideAtom = atom(0);
 
-const Header = () => {
+const Overlay = () => {
     const [slide, setSlide] = useAtom(slideAtom);
     const [displaySlide, setDisplaySlide] = useState(slide);
     const [visible, setVisible] = useState(false);
@@ -21,19 +22,26 @@ const Header = () => {
         setVisible(true);
       }, 2600);
     }, [slide]);
+
     return (
         <div
           className={`fixed z-10 top-0 left-0 bottom-0 right-0 flex flex-col justify-between pointer-events-none text-black ${
             visible ? "" : "opacity-0"
           } transition-opacity duration-1000`}
         >
-          <h1
-            className="w-full mx-auto mt-8 text-2xl font-extrabold flex items-center justify-center"
-          >
-            {scenes[displaySlide].name}
-          </h1>
           
-          <div className="absolute top-0 bottom-0 left-0 right-0 flex-1 flex items-center justify-between p-4">
+          <div className="absolute top-0 bottom-0 left-0 right-0 w-full h-full pt-0">
+            <h1
+              className="w-full text-2xl font-extrabold flex items-center justify-center h-[10%] top-0"
+            >
+              {scenes[displaySlide].name}
+            </h1>
+
+            { displaySlide === 1 && <ExperiencePage /> }
+            { displaySlide === 2 && <SkillsPage /> }
+          </div>
+
+          <div className="absolute top-0 bottom-0 left-0 right-0 flex-1 flex items-center justify-between p-4 z-100">
             <svg
               onClick={() =>
                 setSlide((prev) => (prev > 0 ? prev - 1 : scenes.length - 1))
@@ -75,4 +83,4 @@ const Header = () => {
   };
   
 
-export default Header
+export default Overlay

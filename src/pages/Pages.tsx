@@ -1,9 +1,9 @@
-import { Dodecahedron, Environment, Grid, MeshDistortMaterial, RenderTexture, Text } from "@react-three/drei";
+import { Dodecahedron, Environment, Grid, MeshDistortMaterial } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useControls } from "leva";
 import { scenes } from "../utils/scenes";
-import { Scene } from "./Scene";
-import CameraHandler from "./CameraHandler";
+import { CameraHandler } from "../components";
+import { AboutMePage } from ".";
 
 export const Pages = () => {
     const viewport = useThree((state) => state.viewport);
@@ -55,36 +55,11 @@ export const Pages = () => {
           fadeDistance={50}
           fadeStrength={5}
         />
-        {scenes.map((scene, index) => {
-          return (
-            <mesh
-              key={index}
-              position={[index * (viewport.width + slideDistance), 0, 0]}
-            >
-              
-              {scene.path ? 
-              <>
-              <planeGeometry args={[viewport.width, viewport.height]} />
-              <meshBasicMaterial toneMapped={false}>
-                <RenderTexture attach="map">
-                  <Scene {...scene}/>
-                </RenderTexture>
-              </meshBasicMaterial>
-              </>
-              : <Text 
-              color="red"
-              fontSize={0.1} // Ajusta el tamaño del texto según tus necesidades
-              maxWidth={viewport.width * 0.8} // Establece un ancho máximo para el texto
-              anchorX="center"
-              anchorY="middle"
-              position={[0, 0, 0.01]} // Ligeramente al frente del plano
-          >
-              {scene.name}
-            </Text>
-              }
-            </mesh>
-          );
-        })}
+        <mesh
+              position={[0, 0, 0]}
+            >  
+            <AboutMePage scene={scenes[0]} viewport={viewport}/>
+        </mesh>
       </>
     );
   };

@@ -13,7 +13,12 @@ import * as THREE from "three";
 
 import  { useEffect } from "react";
 
-export const Scene = ({ mainColor, path, ...props }: {mainColor: string, path: string}) => {
+interface Props {
+  mainColor: string;
+  path: string;
+}
+
+const Scene = ({ mainColor, path, ...props }: Props) => {
   const DEG2RAD = Math.PI / 180;
   const { scene } = useGLTF(path);
   
@@ -112,3 +117,5 @@ export const Scene = ({ mainColor, path, ...props }: {mainColor: string, path: s
 useGLTF.preload("/models/abut_me_scene.glb");
 useGLTF.preload("/models/model3_scene.glb");
 useGLTF.preload("/models/semi_scene.glb");
+
+export default Scene;

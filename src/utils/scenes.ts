@@ -1,23 +1,24 @@
-type SceneType = {
-  path: string; 
+export type SceneType = {
   mainColor: string;
   name: string;
 };
 
 export const scenes: SceneType[] = [
     {
-      path: "models/about_me_scene.glb",
       mainColor: "#f9c0ff",
       name: "ABOUT ME",
     },
     {
-      path: "",
-      mainColor: "#c0ffe1",
+      mainColor: "#b3e5fc",
       name: "EXPERIENCE AND PROJECTS",
     },
     {
-      path: "models/semi_scene.glb",
       mainColor: "#ffdec0",
       name: "SKILLS",
     },
 ];
+
+export enum ScenePaths {
+  ABOUT_ME =  "models/about_me_scene.glb",
+  EXPERIENCE = "models/experience_scene.glb",
+}
