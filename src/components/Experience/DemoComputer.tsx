@@ -7,7 +7,7 @@ import { useGLTF} from '@react-three/drei';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Group, Mesh } from 'three';
-import { ScenePaths } from '../utils/scenes';
+import { ScenePaths } from '../../utils/scenes';
 
 const DemoComputer = () => {
   const group = useRef<Group>(null);
