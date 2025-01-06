@@ -6,7 +6,7 @@ export type SceneType = {
 export const scenes: SceneType[] = [
     {
       mainColor: "#f9c0ff",
-      name: "ABOUT ME",
+      name: "ABOUT ME AND THE THINGS I LOVE",
     },
     {
       mainColor: "#b3e5fc",
@@ -20,5 +20,5 @@ export const scenes: SceneType[] = [
 
 export enum ScenePaths {
   ABOUT_ME =  "models/about_me_scene.glb",
-  EXPERIENCE = "models/experience_scene.glb",
+  EXPERIENCE = "models/computer.glb",
 }

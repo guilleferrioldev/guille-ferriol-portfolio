@@ -7,10 +7,11 @@ import { useGLTF} from '@react-three/drei';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Group, Mesh } from 'three';
+import { ScenePaths } from '../utils/scenes';
 
 const DemoComputer = () => {
   const group = useRef<Group>(null);
-  const { nodes, materials } = useGLTF('/models/computer.glb');
+  const { nodes, materials } = useGLTF(ScenePaths.EXPERIENCE);
 
   useGSAP(() => {
     gsap.from((group.current && group.current.rotation), {

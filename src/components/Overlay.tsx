@@ -30,18 +30,18 @@ const Overlay = () => {
           } transition-opacity duration-1000`}
         >
           
-          <div className="absolute top-0 bottom-0 left-0 right-0 w-full h-full pt-0">
+          <div className="absolute top-0 bottom-0 left-0 right-0 w-full h-full pt-0 flex flex-col">
             <h1
-              className="w-full text-2xl font-extrabold flex items-center justify-center h-[10%] top-0"
+              className="w-full text-small md:text-2xl font-bold md:font-extrabold flex items-center justify-center h-[10%] top-0"
             >
               {scenes[displaySlide].name}
             </h1>
-
+            { displaySlide === 0 && <AboutMeOverlay /> }
             { displaySlide === 1 && <ExperiencePage /> }
             { displaySlide === 2 && <SkillsPage /> }
           </div>
 
-          <div className="absolute top-0 bottom-0 left-0 right-0 flex-1 flex items-center justify-between p-4 z-100">
+          <div className="absolute top-0 bottom-0 left-0 right-0 flex-1 flex items-center justify-between p-4">
             <svg
               onClick={() =>
                 setSlide((prev) => (prev > 0 ? prev - 1 : scenes.length - 1))
@@ -84,3 +84,12 @@ const Overlay = () => {
   
 
 export default Overlay
+
+
+const AboutMeOverlay = () => {
+  return (
+    <div className="absolute rounded-lg h-[80%] w-[80%] p-10 flex flex-col items-start justify-end bottom-0 md:bottom-20 left-5 md:left-20">
+      <h1 className="text-2xl md:text-8xl font-extrabold mb-5">Hi, I'm Guille Ferriol</h1>
+      <p className="text-sm md:text-2xl md:max-w-[55%] font-semibold">Sofware engineer passionate about technology and innovation, with the firm objective of facing great challenges and creating solutions that leave a mark. Motivated to work on projects that drive significant change and generate real impact.</p>
+    </div>)
+}
