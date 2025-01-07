@@ -1,7 +1,15 @@
 import { Html, useProgress } from '@react-three/drei';
+import { useEffect } from 'react';
 
-const CanvasLoader = () => {
+const CanvasLoader = ({setIsLoading }: {setIsLoading: React.Dispatch<React.SetStateAction<boolean>>}) => {
   const { progress } = useProgress();
+
+  useEffect(() => {
+    if (progress === 100) {
+      setIsLoading(true);
+    }
+  }, [progress, setIsLoading])
+
   return (
     <Html
       as="div"
