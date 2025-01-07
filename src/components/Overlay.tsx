@@ -2,7 +2,8 @@ import { atom, useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { scenes } from "../utils/scenes";
 import { ExperiencePage, SkillsPage } from "../pages";
-import { Arrows } from ".";
+import { Arrows, DisplaySvgs } from ".";
+import { myLinks } from "../utils/aboutMe";
 
 export const slideAtom = atom(0);
 
@@ -58,5 +59,6 @@ const AboutMeOverlay = () => {
     <div className="absolute rounded-lg h-[80%] w-[80%] p-10 flex flex-col items-start justify-end bottom-0 md:bottom-20 left-5 md:left-20">
       <h1 className="text-2xl md:text-8xl font-extrabold mb-5">Hi, I'm Guille Ferriol</h1>
       <p className="text-sm md:text-2xl md:max-w-[55%] font-semibold">Sofware engineer passionate about technology and innovation, with the firm objective of facing great challenges and creating solutions that leave a mark. Motivated to work on projects that drive significant change and generate real impact.</p>
+      <DisplaySvgs svgs={myLinks} className="border-2 border-gray-900 border-opacity-80 hover:border-opacity-100 mt-5"/>
     </div>)
 }

@@ -5,3 +5,4 @@ export { default as DemoComputer } from "./Experience/DemoComputer";
 export { default as Timeline } from "./Experience/Timeline";
 export { default as Slider } from "./Experience/Slider";
 export { default as Arrows } from "./Arrows";
+export { default as DisplaySvgs } from "./DisplaySvgs";

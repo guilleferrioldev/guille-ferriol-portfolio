@@ -2,7 +2,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { myProjects } from '../../utils/experience';
 import { useState } from 'react';
-import { Arrows } from '..';
+import { Arrows, DisplaySvgs } from '..';
 
 const projectCount = myProjects.length;
 
@@ -34,18 +34,8 @@ const Slider = () => {
   
         <section className='w-full'>
           <div className="w-full flex flex-wrap justify-between items-center gap-5 mb-7">
-  
-              <div className="flex items-center gap-3 flex-wrap">
-                  {currentProject.technologies?.map((svg, index) => (
-                    <div
-                      key={index}
-                      className="relative w-10 h-10 rounded-md p-2 bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur-lg flex justify-center items-center cursor-pointer pointer-events-auto hover:bg-opacity-100"
-                      title={svg.name}
-                    >
-                      <img src={svg.path} alt={svg.name} className="w-full h-full" />
-                    </div>
-                  ))}
-              </div>
+              <DisplaySvgs svgs={currentProject.technologies ?? []} className='bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur-lg hover:bg-opacity-100'/>
+              
             {currentProject.href && (
                   <a
                     className="flex items-center gap-2 cursor-pointer text-white-600 pointer-events-auto 
