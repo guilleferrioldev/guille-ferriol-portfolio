@@ -6,7 +6,8 @@ export default {
       colors: {
         "my-pink": "#f9c0ff",
         "my-blue": "#6c97ab",
-        "my-orange": "#ffdec0",
+        "coffee": "#997d63",
+        "brown": "#3b2e23"
       }
     },
   },

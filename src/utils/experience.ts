@@ -1,3 +1,5 @@
+import { Technology } from ".";
+
 export type WorkExperience = {
     id: number;
     name: string;
@@ -42,18 +44,12 @@ export const workExperiences = <WorkExperience[]>[
     }
   ];
 
-export type Technologies = {
-  id: number;
-  name: string;
-  path: string
-}
-
 export type Project = {
   id: number;
   name: string;
   description: string; 
   href?: string;
-  technologies?: Technologies[];
+  technologies?: Technology[];
 }
 
 export const myProjects = <Project[]>[

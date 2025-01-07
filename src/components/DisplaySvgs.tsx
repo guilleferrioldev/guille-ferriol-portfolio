@@ -5,9 +5,9 @@ export type Svg = {
     href?: string;
 }
 
-const DisplaySvgs = ({ svgs, className }: { svgs : Array<Svg>, className?: string }) => {
+const DisplaySvgs = ({ svgs, className, divClassName }: { svgs : Array<Svg>, className?: string, divClassName?: string }) => {
     return (
-        <div className="flex items-center gap-3 flex-wrap">
+        <div className={`flex items-center gap-3 flex-wrap ${divClassName}`}>
         {svgs?.map((svg, index) => (
             <a
             key={index}
@@ -17,7 +17,7 @@ const DisplaySvgs = ({ svgs, className }: { svgs : Array<Svg>, className?: strin
             target="_blank"
             rel="noopener noreferrer"
             >
-                <img src={svg.path} alt={svg.name} className="w-full h-full" />
+                <img src={svg.path} alt="" className="w-full h-full" />
             </a>
         ))}
         </div>
