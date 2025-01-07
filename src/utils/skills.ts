@@ -119,7 +119,7 @@ export const myLanguages = <Skill[]>[
           {
             id: 3,
             name: "Nats",
-            path: "assets/nats.svg"
+            path: "assets/nats.jpg"
           },
         ]
     },

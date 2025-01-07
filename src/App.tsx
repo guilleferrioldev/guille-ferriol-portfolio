@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react"
-import { Overlay } from "./components";
+import { Overlay, CanvasLoader } from "./components";
 import { Leva } from "leva";
 import { Pages } from "./pages";
 
@@ -9,12 +9,12 @@ function App() {
     <>
      <Leva hidden />
       <Overlay />
-      <Suspense fallback={<p>Loading...</p>}>
       <Canvas shadows camera={{ position: [0, 0, 5], fov: 30 }}>
       <color attach="background" args={["#ececec"]} />
+      <Suspense fallback={<CanvasLoader />}>
         <Pages />
+      </Suspense>
     </Canvas>
-    </Suspense>
     </>
   )
 }
