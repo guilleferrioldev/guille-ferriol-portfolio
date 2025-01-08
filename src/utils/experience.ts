@@ -55,23 +55,6 @@ export type Project = {
 export const myProjects = <Project[]>[
   {
     id: 1,
-    name: 'My Own X',
-    description: 'A personal project to learn in-depth about tools and applications, recreating technologies from scratch.',
-    href: 'https://github.com/guilleferrioldev/my-own-x',
-    technologies: [{
-        id: 1,
-        name: "Golang",
-        path: "assets/golang.svg"
-      },
-      {
-        id: 2,
-        name: "Python",
-        path: "assets/python.svg"
-      }
-    ]
-  },
-  {
-    id: 2,
     name: 'Law Firm Assurance',
     description: 'Collective Law Firm Assurance Management System ',
     technologies: [{
@@ -107,7 +90,7 @@ export const myProjects = <Project[]>[
     ]
   },
   {
-    id: 3,
+    id: 2,
     name: 'Medicinal Plants',
     description: 'Medicinal plant recommendation system. This system will take into account both the textual information about people\'s suffering and show them plants that can help them.',
     href: 'https://github.com/guilleferrioldev/medicinal-plants',
@@ -144,7 +127,7 @@ export const myProjects = <Project[]>[
     ]
   },
   {
-    id: 4,
+    id: 3,
     name: 'Suite TV',
     description: ' Este proyecto utiliza una arquitectura de microfrontends implementada mediante Module Federation, lo que permite la integración modular con el sitio principal. El panel de administración incluye autenticación con NextAuth, una interfaz avanzada construida con Ant Design y servicios REST desarrollados con Java Spring. Está diseñado para la gestión eficiente de usuarios, suscripciones y productos.',
     technologies: [{
@@ -185,7 +168,7 @@ export const myProjects = <Project[]>[
     ]
   },
   {
-    id: 5,
+    id: 4,
     name: 'Count Tv',
     description: 'Algorithms, Data Structures and Design Patterns implemented in Python. Programming concepts.',
     technologies: [{
@@ -222,6 +205,23 @@ export const myProjects = <Project[]>[
   },
   {
     id: 5,
+    name: 'My Own X',
+    description: 'A personal project to learn in-depth about tools and applications, recreating technologies from scratch.',
+    href: 'https://github.com/guilleferrioldev/my-own-x',
+    technologies: [{
+        id: 1,
+        name: "Golang",
+        path: "assets/golang.svg"
+      },
+      {
+        id: 2,
+        name: "Python",
+        path: "assets/python.svg"
+      }
+    ]
+  },
+  {
+    id: 6,
     name: 'Software Engineer Skills ',
     description: 'Algorithms, Data Structures and Design Patterns implemented in Python. Programming concepts.',
     href: 'https://github.com/guilleferrioldev/software-engineer-skills',
@@ -233,7 +233,7 @@ export const myProjects = <Project[]>[
     ]
   },
   {
-    id: 6,
+    id: 7,
     name: 'Addictions in Havana',
     description: 'Statistical study on the offer of addictive products in Old Havana in June 2023',
     href: 'https://github.com/guilleferrioldev/adicciones-hv',
@@ -255,7 +255,7 @@ export const myProjects = <Project[]>[
     ]
   },
   {
-    id: 7,
+    id: 8,
     name: 'Study of climante change',
     description: 'Un estudio sobre el cambio climático en cuba',
     href: 'https://github.com/guilleferrioldev/study-of-climate-change-in-Cuba',
@@ -287,7 +287,7 @@ export const myProjects = <Project[]>[
     ]
   },
   {
-    id: 8,
+    id: 9,
     name: "Cinemapedia",
     description: "Cinemapedia is a movie database that provides information about movies, actors, directors, and more. It is a project that aims to create a comprehensive database of movies and their associated information.",
     technologies: [{
