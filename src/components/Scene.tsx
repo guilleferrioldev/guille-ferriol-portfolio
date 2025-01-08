@@ -36,7 +36,7 @@ const Scene = ({ mainColor, path, ...props }: Props) => {
     <>
       <color attach="background" args={["#ffffff"]} />
       <group {...props} dispose={null}>
-        <PerspectiveCamera makeDefault position={[3, 3, 8]} near={0.5} />
+        <PerspectiveCamera makeDefault position={[3, 3, 8]}/>
         <OrbitControls
           autoRotate
           enablePan={false}

@@ -24,7 +24,7 @@ const SkillsPage = () => {
                     <directionalLight position={[10, 10, 5]} />
                     <Center>
                         <Suspense fallback={<CanvasLoader color={"#3b2e23"} />}>
-                            <Scene {...scenes[2]} path={ScenePaths.EXPERIENCE}/>
+                            <Scene {...scenes[2]} path={ScenePaths.SKILLS}/>
                         </Suspense>
                     </Center>    
                 </Canvas>

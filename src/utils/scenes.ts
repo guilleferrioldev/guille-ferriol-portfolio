@@ -21,4 +21,5 @@ export const scenes = <SceneType[]>[
 export enum ScenePaths {
   ABOUT_ME =  "models/about_me_scene.glb",
   EXPERIENCE = "models/computer.glb",
+  SKILLS = "models/skills_scene.glb",
 }
