@@ -1,6 +1,9 @@
-
-import { ShowSkills, TechnicalSkills } from "../components";
+import { Canvas } from "@react-three/fiber";
+import { CanvasLoader, Scene, ShowSkills, TechnicalSkills } from "../components";
 import { myDatabases, myLanguages, myOS, myOthers } from "../utils/skills";
+import { Suspense } from "react";
+import { Center } from "@react-three/drei";
+import { ScenePaths, scenes } from "../utils/scenes";
 
 const SkillsPage = () => {
     return (
@@ -15,8 +18,16 @@ const SkillsPage = () => {
                 <TechnicalSkills />
                 {/* <SoftSkills /> */}
             </div>
-            <div className="col-span-2 xl:row-span-4 bg-coffee rounded-lg p-5">
-                        3
+            <div className="col-span-2 xl:row-span-4 bg-coffee rounded-lg min-h-[50vh]">
+                <Canvas shadows className='rounded-lg'>
+                    <ambientLight intensity={0.2} />
+                    <directionalLight position={[10, 10, 5]} />
+                    <Center>
+                        <Suspense fallback={<CanvasLoader color={"#3b2e23"} />}>
+                            <Scene {...scenes[2]} path={ScenePaths.EXPERIENCE}/>
+                        </Suspense>
+                    </Center>    
+                </Canvas>
             </div>
             <div className="xl:col-span-4 xl:row-span-2 bg-brown rounded-lg flex items-center justify-center min-h-[20vh] md:min-h-auto">
                 <h1 className='text-2xl md:text-8xl font-extrabold text-gray-100' >Always Learning</h1>  

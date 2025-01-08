@@ -1,11 +1,11 @@
 import { Html, useProgress } from '@react-three/drei';
 import { useEffect } from 'react';
 
-const CanvasLoader = ({setIsLoading }: {setIsLoading: React.Dispatch<React.SetStateAction<boolean>>}) => {
+const CanvasLoader = ({setIsLoading, color}: {setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>, color: string}) => {
   const { progress } = useProgress();
 
   useEffect(() => {
-    if (progress === 100) {
+    if (progress === 100 && setIsLoading) {
       setIsLoading(true);
     }
   }, [progress, setIsLoading])
@@ -23,7 +23,7 @@ const CanvasLoader = ({setIsLoading }: {setIsLoading: React.Dispatch<React.SetSt
       <p
         style={{
           fontSize: 18,
-          color: '#e177ed',
+          color: color,
           fontWeight: 800,
           marginTop: 40,
         }}>

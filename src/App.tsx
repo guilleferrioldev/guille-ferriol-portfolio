@@ -13,7 +13,7 @@ function App() {
       {isLoading  && <Overlay />}
       <Canvas shadows camera={{ position: [0, 0, 5], fov: 30 }}>
       <color attach="background" args={["#ececec"]} />
-      <Suspense fallback={<CanvasLoader setIsLoading={setIsLoading} />}>
+      <Suspense fallback={<CanvasLoader setIsLoading={setIsLoading} color={'#e177ed'}/>}>
         <Pages />
       </Suspense>
     </Canvas>

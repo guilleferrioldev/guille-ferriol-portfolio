@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Center, OrbitControls } from '@react-three/drei';
-import { DemoComputer, Timeline, Slider } from '../components';
+import { DemoComputer, Timeline, Slider, CanvasLoader } from '../components';
 
 const ExperiencePage = () => {
     return (
@@ -9,12 +9,12 @@ const ExperiencePage = () => {
             <div className="col-span-1 xl:row-span-4 bg-my-blue rounded-lg h-[70vh] md:h-auto">
                   <Slider />
             </div>
-            <div className="col-span-1 xl:row-span-4 bg-gray-900 rounded-lg cursor-pointer min-h-[50vh] md:min-h-auto">
-            <Canvas>
+            <div className="col-span-1 xl:row-span-4 bg-gray-900 rounded-lg cursor-pointer min-h-[50vh]">
+            <Canvas className='rounded-lg'>
             <ambientLight intensity={Math.PI} />
             <directionalLight position={[10, 10, 5]} />
             <Center>
-              <Suspense>
+              <Suspense fallback={<CanvasLoader color={"#111827"} />}>
                 <group scale={2} position={[0, -3, 0]} rotation={[0, -0.1, 0]}>
                   <DemoComputer />
                 </group>
@@ -26,7 +26,7 @@ const ExperiencePage = () => {
             <div className="col-span-1 xl:row-span-6 bg-my-blue rounded-lg cursor-pointer">
                 <Timeline/>
             </div>
-            <div className="xl:col-span-2 xl:row-span-2 bg-gray-900 rounded-lg flex items-center justify-center p-5 min-h-[20vh] md:min-h-auto">
+            <div className="xl:col-span-2 xl:row-span-2 bg-gray-900 rounded-lg flex items-center justify-center p-5 min-h-[20vh]">
                 <h1 className='text-2xl md:text-8xl font-extrabold text-gray-100' >Let's work together</h1>
             </div>
         </section>
