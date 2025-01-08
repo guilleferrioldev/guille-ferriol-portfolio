@@ -30,29 +30,38 @@ export const myLanguages = <Skill[]>[
             name: "Next.js",
             path: "assets/nextjs.svg"
           },
-          
           {
             id: 3,
+            name: "Three.js",
+            path: "assets/threejs.svg"
+          },
+          {
+            id: 4,
+            name: "GSAP",
+            path: "assets/gsap.svg"
+          },
+          {
+            id: 5,
             name: "Ant Design",
             path: "assets/ant-design.svg"
           },
           {
-            id: 4,
+            id: 6,
             name: "Redux",
             path: "assets/redux.svg"
           },
           {
-            id: 5,
+            id: 7,
             name: "Tailwind CSS",
             path: "assets/tailwindcss.svg"
           },
           {
-            id: 6,
+            id: 8,
             name: "Zustand",
             path: "assets/zustand.svg"
           },
           {
-            id: 7,
+            id: 9,
             name: "Module Federation",
             path: "assets/module_federation.png"
           },
