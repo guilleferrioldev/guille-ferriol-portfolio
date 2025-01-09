@@ -11,6 +11,8 @@ const Overlay = () => {
     const [slide, setSlide] = useAtom(slideAtom);
     const [displaySlide, setDisplaySlide] = useState(slide);
     const [visible, setVisible] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(false);
+
     useEffect(() => {
       setTimeout(() => {
         setVisible(true);
@@ -18,12 +20,41 @@ const Overlay = () => {
     }, []);
   
     useEffect(() => {
-      setVisible(false);
-      setTimeout(() => {
-        setDisplaySlide(slide);
-        setVisible(true);
-      }, 2600);
-    }, [slide]);
+     setIsTransitioning(true);
+     setVisible(false);
+    setTimeout(() => {
+       setDisplaySlide(slide);
+       setVisible(true);
+       setIsTransitioning(false)
+    }, 2600);
+  }, [slide]);
+
+    useEffect(() => {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (isTransitioning) return;
+
+        if (event.key === 'ArrowLeft') {
+          setSlide((prev) => (prev > 0 ? prev - 1 : scenes.length - 1));
+        } else if (event.key === 'ArrowRight') {
+          setSlide((prev) => (prev < scenes.length - 1 ? prev + 1 : 0));
+        }
+      };
+  
+      window.addEventListener('keydown', handleKeyDown);
+  
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }, [setSlide, isTransitioning]);
+
+    const handleArrowClickLeft = () => {
+      if (isTransitioning) return;
+      setSlide((prev) => (prev > 0 ? prev - 1 : scenes.length - 1));
+    }
+    const handleArrowClickRight = () => {
+      if (isTransitioning) return;
+      setSlide((prev) => (prev < scenes.length - 1 ? prev + 1 : 0));
+    }
 
     return (
         <div
@@ -44,7 +75,7 @@ const Overlay = () => {
           </div>
 
           <div className="absolute top-0 bottom-0 left-0 right-0 flex-1 flex items-center justify-between p-4">
-          <Arrows onClickLeft={() => setSlide((prev) => (prev > 0 ? prev - 1 : scenes.length - 1))} onClickRight={() => setSlide((prev) => (prev < scenes.length - 1 ? prev + 1 : 0))} />
+          <Arrows onClickLeft={handleArrowClickLeft} onClickRight={handleArrowClickRight} />
           </div>
         </div>
     );

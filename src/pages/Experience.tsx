@@ -23,7 +23,7 @@ const ExperiencePage = () => {
             <OrbitControls maxPolarAngle={Math.PI / 2} enableZoom={false} />
           </Canvas> 
             </div>
-            <div className="col-span-1 xl:row-span-6 bg-my-blue rounded-lg cursor-pointer">
+            <div className="col-span-1 xl:row-span-6 bg-my-blue rounded-lg cursor-pointer md:overflow-y-scroll md:overflow-x-auto">
                 <Timeline/>
             </div>
             <div className="xl:col-span-2 xl:row-span-2 bg-gray-900 rounded-lg flex items-center justify-center p-5 min-h-[20vh]">
