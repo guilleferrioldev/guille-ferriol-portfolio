@@ -55,11 +55,7 @@ export const Pages = () => {
           fadeDistance={50}
           fadeStrength={5}
         />
-        <mesh
-              position={[0, 0, 0]}
-            >  
-            <AboutMePage scene={scenes[0]} viewport={viewport}/>
-        </mesh>
+          <AboutMePage scene={scenes[0]} viewport={viewport}/>
       </>
     );
   };
