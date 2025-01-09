@@ -20,7 +20,7 @@ const Overlay = ({ isLoading }: Props) => {
     useEffect(() => {
       setTimeout(() => {
         setVisible(true);
-      }, 1000);
+      }, 0);
     }, []);
   
     useEffect(() => {
@@ -63,7 +63,7 @@ const Overlay = ({ isLoading }: Props) => {
 
     return (
         <div
-          className={`fixed z-10 top-0 left-0 bottom-0 right-0 flex flex-col justify-between pointer-events-none text-black ${isLoading && displaySlide === 0 ? "bg-pink w-full h-full" : ""} ${
+          className={`fixed z-10 top-0 left-0 bottom-0 right-0 flex flex-col justify-between pointer-events-none text-black ${
             visible ? "" : "opacity-0"
           } transition-opacity duration-1000`}
         >

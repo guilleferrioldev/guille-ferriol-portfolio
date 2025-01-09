@@ -8,7 +8,6 @@ export default {
         "my-blue": "#6c97ab",
         "coffee": "#997d63",
         "brown": "#3b2e23",
-        "pink": '#e177ed',
       }
     },
   },
