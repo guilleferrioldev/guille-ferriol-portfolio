@@ -5,12 +5,12 @@ import { Leva } from "leva";
 import { Pages } from "./pages";
 
 function App() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   return (
     <>
      <Leva hidden />
-      {isLoading  && <Overlay />}
+      <Overlay isLoading={isLoading}/>
       <Canvas shadows camera={{ position: [0, 0, 5], fov: 30 }}>
       <color attach="background" args={["#ececec"]} />
       <Suspense fallback={<CanvasLoader setIsLoading={setIsLoading} color={'#e177ed'}/>}>

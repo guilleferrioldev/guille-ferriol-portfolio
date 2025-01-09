@@ -6,7 +6,7 @@ const CanvasLoader = ({setIsLoading, color}: {setIsLoading?: React.Dispatch<Reac
 
   useEffect(() => {
     if (progress === 100 && setIsLoading) {
-      setIsLoading(true);
+      setIsLoading(false);
     }
   }, [progress, setIsLoading])
 

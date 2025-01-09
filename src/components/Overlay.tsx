@@ -7,7 +7,11 @@ import { myLinks } from "../utils/aboutMe";
 
 export const slideAtom = atom(0);
 
-const Overlay = () => {
+interface Props {
+    isLoading: boolean
+}
+
+const Overlay = ({ isLoading }: Props) => {
     const [slide, setSlide] = useAtom(slideAtom);
     const [displaySlide, setDisplaySlide] = useState(slide);
     const [visible, setVisible] = useState(false);
@@ -56,9 +60,10 @@ const Overlay = () => {
       setSlide((prev) => (prev < scenes.length - 1 ? prev + 1 : 0));
     }
 
+
     return (
         <div
-          className={`fixed z-10 top-0 left-0 bottom-0 right-0 flex flex-col justify-between pointer-events-none text-black ${
+          className={`fixed z-10 top-0 left-0 bottom-0 right-0 flex flex-col justify-between pointer-events-none text-black ${isLoading && displaySlide === 0 ? "bg-pink w-full h-full" : ""} ${
             visible ? "" : "opacity-0"
           } transition-opacity duration-1000`}
         >
@@ -75,7 +80,7 @@ const Overlay = () => {
           </div>
 
           <div className="absolute top-0 bottom-0 left-0 right-0 flex-1 flex items-center justify-between p-4">
-          <Arrows onClickLeft={handleArrowClickLeft} onClickRight={handleArrowClickRight} />
+          {!isLoading && <Arrows onClickLeft={handleArrowClickLeft} onClickRight={handleArrowClickRight} />}
           </div>
         </div>
     );
