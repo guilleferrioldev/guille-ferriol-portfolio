@@ -29,7 +29,7 @@ const ExperiencePage = () => {
             <div className="col-span-1 xl:row-span-6 bg-my-blue rounded-lg cursor-pointer md:overflow-y-scroll md:overflow-x-auto">
                 <Timeline/>
             </div>
-            <div className="xl:col-span-2 xl:row-span-2 bg-gray-900 rounded-lg flex items-center justify-center p-5 min-h-[20vh] text-center">
+            <div className="xl:col-span-2 xl:row-span-2 bg-gray-900 rounded-lg flex items-center justify-center p-20 min-h-[20vh] text-center">
                 <h1 className='text-2xl md:text-8xl font-extrabold text-gray-100' >{t("work together")}</h1>
             </div>
         </section>
