@@ -1,23 +1,45 @@
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { myProjects } from '../../utils/experience';
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Arrows, DisplaySvgs } from '..';
 
 const projectCount = myProjects.length;
 
 const Slider = () => {
-    const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
+  const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
+  const timeoutRef = useRef<number>(0); 
 
-    const handleNavigation = (direction: 'next' | 'previous') => {
-        setSelectedProjectIndex((prevIndex) => {
-          if (direction === 'previous') {
-            return prevIndex === 0 ? projectCount - 1 : prevIndex - 1;
-          } else {
-            return prevIndex === projectCount - 1 ? 0 : prevIndex + 1;
+  const handleNavigation = useCallback((direction: 'next' | 'previous') => {
+    setSelectedProjectIndex((prevIndex) => {
+      if (direction === 'previous') {
+        return prevIndex === 0 ? projectCount - 1 : prevIndex - 1;
+      } else {
+        return prevIndex === projectCount - 1 ? 0 : prevIndex + 1;
+      }
+    });
+    resetTimeout(); 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+    const resetTimeout = useCallback(() => {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current); 
+        }
+        timeoutRef.current = setTimeout(() => {
+          handleNavigation('next');
+        }, 10000);
+      }, [handleNavigation]);
+  
+    useEffect(() => {
+        resetTimeout();
+    
+        return () => {
+          if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
           }
-        });
-      };
+        };
+      }, [resetTimeout]);
 
     useGSAP(() => {
         gsap.fromTo(`.animatedText`, { opacity: 0 }, { opacity: 1, duration: 1, stagger: 0.2, ease: 'power2.inOut' });
