@@ -104,6 +104,11 @@ export const myLanguages = <Skill[]>[
             id: 6,
             name: "Scikit-learn",
             path: "assets/scikit-learn.svg"
+          },
+          {
+            id: 7,
+            name: "plotly",
+            path: "assets/plotly.svg"
           }
         ]
     },

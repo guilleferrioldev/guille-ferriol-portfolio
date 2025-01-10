@@ -51,14 +51,14 @@ const Slider = () => {
 
     return (
       <div className="w-full h-full flex flex-col justify-between items-center p-5 relative"> 
-        <div className="w-full flex flex-col gap-5 text-white-600 mt-5 mb-5">
+        <section className="w-full flex flex-col gap-5 text-white-600 mt-5 mb-5 max-h-[80%] overflow-y-scroll overflow-x-hidden">
           <p className="text-2xl font-semibold animatedText">{t(currentProject.name)}</p>
           <p className="animatedText">{t(currentProject.description)}</p>
           <p className="animatedText">{t(currentProject.learning)}</p>
-        </div>
+        </section>
   
-        <section className='w-full'>
-          <div className="w-full flex flex-wrap justify-between items-center gap-5 mb-7">
+        <section className='w-full max-h-[20%]'>
+          <div className="w-full flex flex-wrap justify-between items-center gap-3 mb-5">
               <DisplaySvgs svgs={currentProject.technologies ?? []} className='bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur-lg hover:bg-opacity-100'/>
               
             {currentProject.href && (
