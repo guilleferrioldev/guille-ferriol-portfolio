@@ -13,33 +13,33 @@ export const workExperiences = <WorkExperience[]>[
     {
       id: 1,
       name: 'CUJAE',
-      pos: 'Architecture Student',
+      pos: 'architecture student',
       duration: '2019 - 2021',
-      text: "CUJAE serves as my go-to tool for creating interactive prototypes. I use it to bring designs to  life, allowing stakeholders to experience the user flow and interactions before development.",
+      text: "cujae description",
       icon: "cujae_logo.png",
     },
     {
       id: 2,
       name: 'MATCOM',
-      pos: 'Data Science Student',
+      pos: "data scince student",
       duration: '2022 - 2024',
-      text: "Figma is my collaborative design platform of choice. I utilize it to work seamlessly with team members and clients, facilitating real-time feedback and design iterations. Its cloud-based.",
+      text: "matcom description",
       icon: 'matcom_logo.png',
     },
     {
       id: 3,
       name: 'Bufetes Colectivos',
-      pos: 'Full Stack Developer',
+      pos: "full stack developer",
       duration: '2023 - 2024',
-      text: "Notion helps me keep my projects organized. I use it for project management, task tracking, and as a central hub for documentation, ensuring that everything from design notes to.",
+      text: "onbc description",
       icon: 'bufetes_logo.png',
     },
     {
         id: 4,
         name: 'Countigo',
-        pos: 'Frontend Developer',
-        duration: '2024 - Present',
-        text: "Figma is my collaborative design platform of choice. I utilize it to work seamlessly with team members and clients, facilitating real-time feedback and design iterations. Its cloud-based.",
+        pos: 'frontend developer',
+        duration: "current time",
+        text: "countigo description",
         icon: 'countigo_logo.jpg',
     }
   ];
@@ -48,6 +48,7 @@ export type Project = {
   id: number;
   name: string;
   description: string; 
+  learning: string;
   href?: string;
   technologies?: Technology[];
 }
@@ -55,8 +56,9 @@ export type Project = {
 export const myProjects = <Project[]>[
   {
     id: 1,
-    name: 'Law Firm Assurance',
-    description: 'Collective Law Firm Assurance Management System ',
+    name: "law firm assurance",
+    description: "law firm assurance description",
+    learning: "law firm assurance learning",
     technologies: [{
         id: 2,
         name: "Typescript",
@@ -91,8 +93,9 @@ export const myProjects = <Project[]>[
   },
   {
     id: 2,
-    name: 'Medicinal Plants',
-    description: 'Medicinal plant recommendation system. This system will take into account both the textual information about people\'s suffering and show them plants that can help them.',
+    name: 'medicinal plant recommendation system',
+    description: 'medicinal plant recommendation system description',
+    learning: 'medicinal plant recommendation system learning',
     href: 'https://github.com/guilleferrioldev/medicinal-plants',
     technologies: [{
         id: 2,
@@ -129,7 +132,8 @@ export const myProjects = <Project[]>[
   {
     id: 3,
     name: 'Suite TV',
-    description: ' Este proyecto utiliza una arquitectura de microfrontends implementada mediante Module Federation, lo que permite la integración modular con el sitio principal. El panel de administración incluye autenticación con NextAuth, una interfaz avanzada construida con Ant Design y servicios REST desarrollados con Java Spring. Está diseñado para la gestión eficiente de usuarios, suscripciones y productos.',
+    description: "suitetv description",
+    learning: "suitetv learning",
     technologies: [{
         id: 1,
         name: "Typescript",
@@ -169,8 +173,9 @@ export const myProjects = <Project[]>[
   },
   {
     id: 4,
-    name: 'Count Tv',
-    description: 'Algorithms, Data Structures and Design Patterns implemented in Python. Programming concepts.',
+    name: 'Count TV',
+    description: "countv description",
+    learning: "countv learning",
     technologies: [{
         id: 1,
         name: "Typescript",
@@ -206,7 +211,8 @@ export const myProjects = <Project[]>[
   {
     id: 5,
     name: 'My Own X',
-    description: 'A personal project to learn in-depth about tools and applications, recreating technologies from scratch.',
+    description: "my own x description",
+    learning: "my own x learning",
     href: 'https://github.com/guilleferrioldev/my-own-x',
     technologies: [{
         id: 1,
@@ -222,8 +228,9 @@ export const myProjects = <Project[]>[
   },
   {
     id: 6,
-    name: 'Software Engineer Skills ',
-    description: 'Algorithms, Data Structures and Design Patterns implemented in Python. Programming concepts.',
+    name: "software engineer skills",
+    description: "software engineer skills description",
+    learning: "software engineer skills learning",
     href: 'https://github.com/guilleferrioldev/software-engineer-skills',
     technologies: [{
         id: 1,
@@ -234,8 +241,22 @@ export const myProjects = <Project[]>[
   },
   {
     id: 7,
-    name: 'Addictions in Havana',
-    description: 'Statistical study on the offer of addictive products in Old Havana in June 2023',
+    name: 'programming problems solved',
+    description: "programming problems solved description",
+    learning: "programming problems solved learning",
+    href: 'https://github.com/guilleferrioldev/programming-problems-solved',
+    technologies: [{
+        id: 1,
+        name: "Python",
+        path: "assets/python.svg"
+      },
+    ]
+  },
+  {
+    id: 8,
+    name: "addictions",
+    description: "addictions description",
+    learning: "addictions learning",
     href: 'https://github.com/guilleferrioldev/adicciones-hv',
     technologies: [{
         id: 1,
@@ -252,12 +273,21 @@ export const myProjects = <Project[]>[
         name: "NumPy",
         path: "assets/numpy.svg"
       },
+      { id: 4, 
+        name: "Matplotlib",
+        path: "assets/matplotlib.svg" 
+      }, 
+      { id: 5, 
+        name: "Plotly",
+        path: "assets/plotly.svg" 
+      }
     ]
   },
   {
-    id: 8,
-    name: 'Study of climante change',
-    description: 'Un estudio sobre el cambio climático en cuba',
+    id: 9,
+    name: "climate change",
+    description: "climate change description",
+    learning: "climate change learning",
     href: 'https://github.com/guilleferrioldev/study-of-climate-change-in-Cuba',
     technologies: [{
         id: 1,
@@ -287,9 +317,10 @@ export const myProjects = <Project[]>[
     ]
   },
   {
-    id: 9,
+    id: 10,
     name: "Cinemapedia",
-    description: "Cinemapedia is a movie database that provides information about movies, actors, directors, and more. It is a project that aims to create a comprehensive database of movies and their associated information.",
+    description: "cinemapedia description",
+    learning: "cinemapedia learning",
     technologies: [{
       id: 1,
       name: "Dart",

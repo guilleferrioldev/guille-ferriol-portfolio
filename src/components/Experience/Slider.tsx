@@ -3,10 +3,12 @@ import { useGSAP } from '@gsap/react';
 import { myProjects } from '../../utils/experience';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Arrows, DisplaySvgs } from '..';
+import { useTranslation } from 'react-i18next';
 
 const projectCount = myProjects.length;
 
 const Slider = () => {
+  const { t } = useTranslation();
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
   const timeoutRef = useRef<number>(0); 
 
@@ -50,8 +52,9 @@ const Slider = () => {
     return (
       <div className="w-full h-full flex flex-col justify-between items-center p-5 relative"> 
         <div className="w-full flex flex-col gap-5 text-white-600 mt-5 mb-5">
-          <p className="text-2xl font-semibold animatedText">{currentProject.name}</p>
-          <p className="animatedText">{currentProject.description}</p>
+          <p className="text-2xl font-semibold animatedText">{t(currentProject.name)}</p>
+          <p className="animatedText">{t(currentProject.description)}</p>
+          <p className="animatedText">{t(currentProject.learning)}</p>
         </div>
   
         <section className='w-full'>

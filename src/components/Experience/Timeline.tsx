@@ -1,6 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { workExperiences } from "../../utils/experience";
 
 const Timeline = () => {
+  const { t } = useTranslation();
+  
     return (
         <ul className="w-full h-full">
             {workExperiences.map((item, index) => (
@@ -18,9 +21,9 @@ const Timeline = () => {
                   <div className="group-hover:text-white transition-all ease-in-out duration-500 sm:p-5 px-2.5 py-5">
                     <p className="font-bold text-white-800">{item.name}</p>
                     <p className="text-sm mb-1">
-                      {item.pos} -- <span>{item.duration}</span>
+                      {t(item.pos)} -- <span>{t(item.duration)}</span>
                     </p>
-                    <p>{item.text}</p>
+                    <p>{t(item.text)}</p>
                   </div>
                 </div>
               ))}
