@@ -10,11 +10,11 @@ export const scenes = <SceneType[]>[
     },
     {
       mainColor: "#b3e5fc",
-      name: "EXPERIENCE AND PROJECTS",
+      name: "experience and projects",
     },
     {
       mainColor: "#ffdec0",
-      name: "SKILLS",
+      name: "skills",
     },
 ];
 

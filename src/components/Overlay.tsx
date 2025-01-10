@@ -4,6 +4,7 @@ import { scenes } from "../utils/scenes";
 import { ExperiencePage, SkillsPage } from "../pages";
 import { Arrows, DisplaySvgs, SelectLanguage } from ".";
 import { myLinks } from "../utils/aboutMe";
+import { useTranslation } from "react-i18next";
 
 export const slideAtom = atom(0);
 
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const Overlay = ({ isLoading }: Props) => {
+    const { t } = useTranslation();
     const [slide, setSlide] = useAtom(slideAtom);
     const [displaySlide, setDisplaySlide] = useState(slide);
     const [visible, setVisible] = useState(false);
@@ -72,7 +74,7 @@ const Overlay = ({ isLoading }: Props) => {
             <div className={`w-full text-small md:text-2xl font-bold md:font-extrabold flex items-center justify-between h-[10%] top-0 p-5 pr-5 ${displaySlide === 0 ? "md:pr-5" : "md:pr-20"}`}>
               <h2 className="opacity-0 hidden md:block">Guille Ferriol</h2>
               <h1>
-                {scenes[displaySlide].name}
+                {t(scenes[displaySlide].name)}
               </h1>
               <SelectLanguage />
             </div>
@@ -94,10 +96,12 @@ export default Overlay
 
 
 const AboutMeOverlay = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="absolute rounded-lg h-[80%] w-[80%] p-10 flex flex-col items-start justify-end bottom-0 md:bottom-20 left-5 md:left-20">
-      <h1 className="text-2xl md:text-8xl font-extrabold mb-5">Hi, I'm Guille Ferriol</h1>
-      <p className="text-sm md:text-2xl md:max-w-[55%] font-semibold">Sofware engineer passionate about technology and innovation, with the firm objective of facing great challenges and creating solutions that leave a mark. Motivated to work on projects that drive significant change and generate real impact.</p>
+      <h1 className="text-2xl md:text-8xl font-extrabold mb-5">{t("hello")}</h1>
+      <p className="text-sm md:text-2xl md:max-w-[55%] font-semibold">{t("presentation")}</p>
       <DisplaySvgs svgs={myLinks} className="border-2 border-gray-900 border-opacity-80 hover:border-opacity-100 mt-5"/>
     </section>)
 }

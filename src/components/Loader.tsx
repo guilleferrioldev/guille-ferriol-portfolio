@@ -1,7 +1,9 @@
 import { Html, useProgress } from '@react-three/drei';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const CanvasLoader = ({setIsLoading, color}: {setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>, color: string}) => {
+  const { t } = useTranslation();
   const { progress } = useProgress();
 
   useEffect(() => {
@@ -27,7 +29,7 @@ const CanvasLoader = ({setIsLoading, color}: {setIsLoading?: React.Dispatch<Reac
           fontWeight: 800,
           marginTop: 40,
         }}>
-        {progress !== 0 ? `${progress.toFixed(2)}%` : 'Loading...'}
+        {progress !== 0 ? `${progress.toFixed(2)}%` : `${t("loading")}...`}
       </p>
     </Html>
   );

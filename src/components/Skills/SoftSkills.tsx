@@ -1,13 +1,17 @@
+import { useTranslation } from "react-i18next";
+
 const SoftSkills = () => {
+  const { t } = useTranslation();
+
   return (
     <>
-            <h1 className="md:text-2xl font-semibold text-brown mt-5">Soft skills</h1>
+            <h1 className="md:text-2xl font-semibold text-brown mt-5">{t("soft skills")}</h1>
             <ul className="list-disc pl-5">
-                <li> Languages: Spanish and English </li>
-                <li> Troubleshooting and Critical Thinking </li>
-                <li> Teamwork and Empathy </li>
-                <li> Adaptability </li>
-                <li> Time Management and Organization </li>
+                <li> {t("languages")} </li>
+                <li> {t("troubleshooting")} </li>
+                <li> {t("teamwork")} </li>
+                <li> {t("adaptability")} </li>
+                <li> {t("time management")} </li>
             </ul>
         </>
   );
