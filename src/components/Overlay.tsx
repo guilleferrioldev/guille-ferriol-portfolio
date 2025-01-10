@@ -2,7 +2,7 @@ import { atom, useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { scenes } from "../utils/scenes";
 import { ExperiencePage, SkillsPage } from "../pages";
-import { Arrows, DisplaySvgs } from ".";
+import { Arrows, DisplaySvgs, SelectLanguage } from ".";
 import { myLinks } from "../utils/aboutMe";
 
 export const slideAtom = atom(0);
@@ -62,27 +62,30 @@ const Overlay = ({ isLoading }: Props) => {
 
 
     return (
-        <div
+        <main
           className={`fixed z-10 top-0 left-0 bottom-0 right-0 flex flex-col justify-between pointer-events-none text-black ${
             visible ? "" : "opacity-0"
           } transition-opacity duration-1000`}
         >
           
-          <div className="absolute top-0 bottom-0 left-0 right-0 w-full h-full pt-0 flex flex-col">
-            <h1
-              className="w-full text-small md:text-2xl font-bold md:font-extrabold flex items-center justify-center h-[10%] top-0"
-            >
-              {scenes[displaySlide].name}
-            </h1>
+          <section className="absolute top-0 bottom-0 left-0 right-0 w-full h-full pt-0 flex flex-col">
+            <div className={`w-full text-small md:text-2xl font-bold md:font-extrabold flex items-center justify-between h-[10%] top-0 p-5 pr-5 ${displaySlide === 0 ? "md:pr-5" : "md:pr-20"}`}>
+              <h2 className="opacity-0 hidden md:block">Guille Ferriol</h2>
+              <h1>
+                {scenes[displaySlide].name}
+              </h1>
+              <SelectLanguage />
+            </div>
+          
             { displaySlide === 0 && <AboutMeOverlay /> }
             { displaySlide === 1 && <ExperiencePage /> }
             { displaySlide === 2 && <SkillsPage /> }
-          </div>
+          </section>
 
-          <div className="absolute top-0 bottom-0 left-0 right-0 flex-1 flex items-center justify-between p-4">
+          <section className="absolute top-0 bottom-0 left-0 right-0 flex-1 flex items-center justify-between p-4">
           {!isLoading && <Arrows onClickLeft={handleArrowClickLeft} onClickRight={handleArrowClickRight} />}
-          </div>
-        </div>
+          </section>
+        </main>
     );
   };
   
@@ -92,9 +95,9 @@ export default Overlay
 
 const AboutMeOverlay = () => {
   return (
-    <div className="absolute rounded-lg h-[80%] w-[80%] p-10 flex flex-col items-start justify-end bottom-0 md:bottom-20 left-5 md:left-20">
+    <section className="absolute rounded-lg h-[80%] w-[80%] p-10 flex flex-col items-start justify-end bottom-0 md:bottom-20 left-5 md:left-20">
       <h1 className="text-2xl md:text-8xl font-extrabold mb-5">Hi, I'm Guille Ferriol</h1>
       <p className="text-sm md:text-2xl md:max-w-[55%] font-semibold">Sofware engineer passionate about technology and innovation, with the firm objective of facing great challenges and creating solutions that leave a mark. Motivated to work on projects that drive significant change and generate real impact.</p>
       <DisplaySvgs svgs={myLinks} className="border-2 border-gray-900 border-opacity-80 hover:border-opacity-100 mt-5"/>
-    </div>)
+    </section>)
 }

@@ -6,7 +6,7 @@ export type SceneType = {
 export const scenes = <SceneType[]>[
     {
       mainColor: "#f9c0ff",
-      name: "ABOUT ME AND THE THINGS I LOVE",
+      name: "",
     },
     {
       mainColor: "#b3e5fc",
