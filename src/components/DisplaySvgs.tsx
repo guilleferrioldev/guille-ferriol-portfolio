@@ -11,7 +11,7 @@ const DisplaySvgs = ({ svgs, className, divClassName }: { svgs : Array<Svg>, cla
         {svgs?.map((svg, index) => (
             <a
             key={index}
-            className={`w-10 h-10 rounded-md p-2 flex justify-center items-center cursor-pointer pointer-events-auto ${className}`}
+            className={`relative w-10 h-10 rounded-md p-2 flex justify-center items-center cursor-pointer pointer-events-auto ${className}`}
             title={svg.name}
             href={svg.href}
             target="_blank"
