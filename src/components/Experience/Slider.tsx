@@ -57,7 +57,7 @@ const Slider = () => {
           <p className="animatedText">{t(currentProject.learning)}</p>
         </section>
   
-        <section className='w-full max-h-[20%]'>
+        <section className='w-full min-h-[20%] max-h-[35%]'>
           <div className="w-full flex flex-wrap justify-between items-center gap-3 mb-5">
               <DisplaySvgs svgs={currentProject.technologies ?? []} className='bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur-lg hover:bg-opacity-100'/>
               
