@@ -16,7 +16,7 @@ export const myLinks = <Links[]>[
     id: 2,
     name: "Linkedin",
     path: "assets/linkedin.svg",
-    href: "https://www.linkedin.com/in/guillermo-ferriol-ravelo-20933720b/",
+    href: "https://www.linkedin.com/in/guilleferriol/",
   },
   {
     id: 3,
