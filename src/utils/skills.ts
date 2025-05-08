@@ -215,6 +215,11 @@ export const myOthers = <Skill[]>[
             id: 5,
             name: "Kafka",
             path: "assets/kafka.svg"
+          },
+          {
+            id: 5,
+            name: "GraphQL",
+            path: "assets/graphql.svg"
           }
       ],
     }

@@ -38,9 +38,17 @@ export const workExperiences = <WorkExperience[]>[
         id: 4,
         name: 'Countigo',
         pos: 'frontend developer',
-        duration: "current time",
+        duration: "2024 - 2025",
         text: "countigo description",
         icon: 'countigo_logo.jpg',
+    },
+    {
+      id: 5,
+      name: 'Pyxel Solutions',
+      pos: 'mobile developer',
+      duration: "current time",
+      text: "pyxel description",
+      icon: 'pyxel.png',
     }
   ];
 
@@ -210,6 +218,27 @@ export const myProjects = <Project[]>[
   },
   {
     id: 5,
+    name: "FAIND",
+    description: "faind description",
+    learning: "faind learning",
+    technologies: [{
+      id: 1,
+      name: "Dart",
+      path: "assets/dart.svg"
+      },
+      {
+        id: 2,
+        name: "Flutter",
+        path: "assets/flutter.svg"
+      },
+      {
+        id: 3,
+        name: "GraphQL",
+        path: "assets/graphql.svg"
+      }]
+    },
+  {
+    id: 6,
     name: 'My Own X',
     description: "my own x description",
     learning: "my own x learning",
@@ -227,7 +256,7 @@ export const myProjects = <Project[]>[
     ]
   },
   {
-    id: 6,
+    id: 7,
     name: "software engineer skills",
     description: "software engineer skills description",
     learning: "software engineer skills learning",
@@ -240,7 +269,7 @@ export const myProjects = <Project[]>[
     ]
   },
   {
-    id: 7,
+    id: 8,
     name: 'programming problems solved',
     description: "programming problems solved description",
     learning: "programming problems solved learning",
@@ -253,7 +282,7 @@ export const myProjects = <Project[]>[
     ]
   },
   {
-    id: 8,
+    id: 9,
     name: "addictions",
     description: "addictions description",
     learning: "addictions learning",
@@ -284,7 +313,7 @@ export const myProjects = <Project[]>[
     ]
   },
   {
-    id: 9,
+    id: 10,
     name: "climate change",
     description: "climate change description",
     learning: "climate change learning",
@@ -317,7 +346,7 @@ export const myProjects = <Project[]>[
     ]
   },
   {
-    id: 10,
+    id: 11,
     name: "Cinemapedia",
     description: "cinemapedia description",
     learning: "cinemapedia learning",
