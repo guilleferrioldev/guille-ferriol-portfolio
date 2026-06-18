@@ -65,6 +65,16 @@ export const myLanguages = <Skill[]>[
             name: "Module Federation",
             path: "assets/module_federation.png"
           },
+          {
+            id: 10,
+            name: "Node.js",
+            path: "assets/nodejs.svg"
+          },
+          {
+            id: 11,
+            name: "NestJS",
+            path: "assets/nestjs.svg"
+          },
         ]
     },
     {
@@ -220,6 +230,16 @@ export const myOthers = <Skill[]>[
             id: 5,
             name: "GraphQL",
             path: "assets/graphql.svg"
+          },
+          {
+            id: 6,
+            name: "GitHub Actions",
+            path: "assets/github-actions.svg"
+          },
+          {
+            id: 7,
+            name: "Vercel",
+            path: "assets/vercel.svg"
           }
       ],
     }

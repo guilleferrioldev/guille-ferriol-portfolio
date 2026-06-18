@@ -55,7 +55,7 @@ export const workExperiences = <WorkExperience[]>[
 export type Project = {
   id: number;
   name: string;
-  description: string; 
+  description: string;
   learning: string;
   href?: string;
   technologies?: Technology[];
@@ -64,301 +64,220 @@ export type Project = {
 export const myProjects = <Project[]>[
   {
     id: 1,
-    name: "law firm assurance",
-    description: "law firm assurance description",
-    learning: "law firm assurance learning",
-    technologies: [{
-        id: 2,
-        name: "Typescript",
-        path: "assets/typescript.svg"
-      },
-      {
-        id: 2, 
-        name: "React",
-        path: "assets/react.svg"
-      },
-      {
-        id: 3,
-        name: "Next.js",
-        path: "assets/nextjs.svg"
-      },
-      {
-        id: 4,
-        name: "Golang",
-        path: "assets/golang.svg"
-      },
-      {
-        id: 5,
-        name: "Fiber",
-        path: "assets/fiber.svg"
-      },
-      {
-        id: 6,
-        name: "Postgres",
-        path: "assets/postgresql.svg"
-      }
+    name: "FAIND",
+    description: "faind description",
+    learning: "faind learning",
+    technologies: [
+      { id: 1, name: "Dart", path: "assets/dart.svg" },
+      { id: 2, name: "Flutter", path: "assets/flutter.svg" },
+      { id: 3, name: "GraphQL", path: "assets/graphql.svg" }
     ]
   },
   {
     id: 2,
-    name: 'medicinal plant recommendation system',
-    description: 'medicinal plant recommendation system description',
-    learning: 'medicinal plant recommendation system learning',
-    href: 'https://github.com/guilleferrioldev/medicinal-plants',
-    technologies: [{
-        id: 2,
-        name: "Typescript",
-        path: "assets/typescript.svg"
-      },
-      {
-        id: 2, 
-        name: "React",
-        path: "assets/react.svg"
-      },
-      {
-        id: 3,
-        name: "Next.js",
-        path: "assets/nextjs.svg"
-      },
-      {
-        id: 4,
-        name: "Python",
-        path: "assets/python.svg"
-      },
-      {
-        id: 5,
-        name: "Fast Api",
-        path: "assets/fastapi.svg"
-      },
-      {
-        id: 6,
-        name: "Scikit-learn",
-        path: "assets/scikit-learn.svg"
-      }
+    name: "trackmont",
+    description: "trackmont description",
+    learning: "trackmont learning",
+    technologies: [
+      { id: 1, name: "Dart", path: "assets/dart.svg" },
+      { id: 2, name: "Flutter", path: "assets/flutter.svg" },
+      { id: 3, name: "Node.js", path: "assets/nodejs.svg" }
     ]
   },
   {
     id: 3,
-    name: 'Suite TV',
-    description: "suitetv description",
-    learning: "suitetv learning",
-    technologies: [{
-        id: 1,
-        name: "Typescript",
-        path: "assets/typescript.svg"
-      },
-      {
-        id: 2, 
-        name: "React",
-        path: "assets/react.svg"
-      },
-      {
-        id: 3,
-        name: "Next.js",
-        path: "assets/nextjs.svg"
-      },
-      {
-        id: 4, 
-        name: "Next Auth",
-        path: "assets/next-auth.png"
-      },
-      {
-        id: 5,
-        name: "Ant Design",
-        path: "assets/ant-design.svg"
-      },
-      {
-        id: 6,
-        name: "Module Federation",
-        path: "assets/module_federation.png"
-      },
-      {
-        id: 7,
-        name: "Zustand",
-        path: "assets/zustand.svg"
-      }
+    name: "seguipass",
+    description: "seguipass description",
+    learning: "seguipass learning",
+    technologies: [
+      { id: 1, name: "Dart", path: "assets/dart.svg" },
+      { id: 2, name: "Flutter", path: "assets/flutter.svg" }
     ]
   },
   {
     id: 4,
-    name: 'Count TV',
-    description: "countv description",
-    learning: "countv learning",
-    technologies: [{
-        id: 1,
-        name: "Typescript",
-        path: "assets/typescript.svg"
-      },
-      {
-        id: 2, 
-        name: "React",
-        path: "assets/react.svg"
-      },
-      {
-        id: 3,
-        name: "Next.js",
-        path: "assets/nextjs.svg"
-      },
-      {
-        id: 4,
-        name: "Ant Design",
-        path: "assets/ant-design.svg"
-      },
-      {
-        id: 5, 
-        name: "Tailwind CSS",
-        path: "assets/tailwindcss.svg"
-      },
-      {
-        id: 6,
-        name: "Redux",
-        path: "assets/redux.svg"
-      }
+    name: "deltoro",
+    description: "deltoro description",
+    learning: "deltoro learning",
+    technologies: [
+      { id: 1, name: "Dart", path: "assets/dart.svg" },
+      { id: 2, name: "Flutter", path: "assets/flutter.svg" }
     ]
   },
   {
     id: 5,
-    name: "FAIND",
-    description: "faind description",
-    learning: "faind learning",
-    technologies: [{
-      id: 1,
-      name: "Dart",
-      path: "assets/dart.svg"
-      },
-      {
-        id: 2,
-        name: "Flutter",
-        path: "assets/flutter.svg"
-      },
-      {
-        id: 3,
-        name: "GraphQL",
-        path: "assets/graphql.svg"
-      }]
-    },
+    name: "charge2go",
+    description: "charge2go description",
+    learning: "charge2go learning",
+    technologies: [
+      { id: 1, name: "Dart", path: "assets/dart.svg" },
+      { id: 2, name: "Flutter", path: "assets/flutter.svg" },
+      { id: 3, name: "GraphQL", path: "assets/graphql.svg" }
+    ]
+  },
   {
     id: 6,
-    name: 'My Own X',
-    description: "my own x description",
-    learning: "my own x learning",
-    href: 'https://github.com/guilleferrioldev/my-own-x',
-    technologies: [{
-        id: 1,
-        name: "Golang",
-        path: "assets/golang.svg"
-      },
-      {
-        id: 2,
-        name: "Python",
-        path: "assets/python.svg"
-      }
+    name: "argopos",
+    description: "argopos description",
+    learning: "argopos learning",
+    technologies: [
+      { id: 1, name: "Dart", path: "assets/dart.svg" },
+      { id: 2, name: "Flutter", path: "assets/flutter.svg" },
+      { id: 3, name: "GraphQL", path: "assets/graphql.svg" }
     ]
   },
   {
     id: 7,
-    name: "software engineer skills",
-    description: "software engineer skills description",
-    learning: "software engineer skills learning",
-    href: 'https://github.com/guilleferrioldev/software-engineer-skills',
-    technologies: [{
-        id: 1,
-        name: "Python",
-        path: "assets/python.svg"
-      },
+    name: "mhhome",
+    description: "mhhome description",
+    learning: "mhhome learning",
+    technologies: [
+      { id: 1, name: "Dart", path: "assets/dart.svg" },
+      { id: 2, name: "Flutter", path: "assets/flutter.svg" },
+      { id: 3, name: "GraphQL", path: "assets/graphql.svg" }
     ]
   },
   {
     id: 8,
-    name: 'programming problems solved',
-    description: "programming problems solved description",
-    learning: "programming problems solved learning",
-    href: 'https://github.com/guilleferrioldev/programming-problems-solved',
-    technologies: [{
-        id: 1,
-        name: "Python",
-        path: "assets/python.svg"
-      },
+    name: "decorect",
+    description: "decorect description",
+    learning: "decorect learning",
+    technologies: [
+      { id: 1, name: "Typescript", path: "assets/typescript.svg" },
+      { id: 2, name: "React", path: "assets/react.svg" },
+      { id: 3, name: "Next.js", path: "assets/nextjs.svg" },
+      { id: 4, name: "NestJS", path: "assets/nestjs.svg" },
+      { id: 5, name: "Postgres", path: "assets/postgresql.svg" }
     ]
   },
   {
     id: 9,
-    name: "addictions",
-    description: "addictions description",
-    learning: "addictions learning",
-    href: 'https://github.com/guilleferrioldev/adicciones-hv',
-    technologies: [{
-        id: 1,
-        name: "Python",
-        path: "assets/python.svg"
-      },
-      {
-        id: 2,
-        name: "Pandas",
-        path: "assets/pandas.svg"
-      },
-      {
-        id: 3,
-        name: "NumPy",
-        path: "assets/numpy.svg"
-      },
-      { id: 4, 
-        name: "Matplotlib",
-        path: "assets/matplotlib.svg" 
-      }, 
-      { id: 5, 
-        name: "Plotly",
-        path: "assets/plotly.svg" 
-      }
+    name: "ardent",
+    description: "ardent description",
+    learning: "ardent learning",
+    technologies: [
+      { id: 1, name: "Typescript", path: "assets/typescript.svg" },
+      { id: 2, name: "React", path: "assets/react.svg" },
+      { id: 3, name: "Next.js", path: "assets/nextjs.svg" },
+      { id: 4, name: "NestJS", path: "assets/nestjs.svg" },
+      { id: 5, name: "Postgres", path: "assets/postgresql.svg" }
     ]
   },
   {
     id: 10,
-    name: "climate change",
-    description: "climate change description",
-    learning: "climate change learning",
-    href: 'https://github.com/guilleferrioldev/study-of-climate-change-in-Cuba',
-    technologies: [{
-        id: 1,
-        name: "Python",
-        path: "assets/python.svg"
-      },
-      {
-        id: 2,
-        name: "Pandas",
-        path: "assets/pandas.svg"
-      },
-      {
-        id: 3,
-        name: "NumPy",
-        path: "assets/numpy.svg"
-      },
-      {
-        id: 4,
-        name: "Matplotlib", 
-        path: "assets/matplotlib.svg"
-      },
-      {
-        id: 5,
-        name: "Streamlit",
-        path: "assets/streamlit.svg"
-      },
+    name: 'Suite TV',
+    description: "suitetv description",
+    learning: "suitetv learning",
+    technologies: [
+      { id: 1, name: "Typescript", path: "assets/typescript.svg" },
+      { id: 2, name: "React", path: "assets/react.svg" },
+      { id: 3, name: "Next.js", path: "assets/nextjs.svg" },
+      { id: 4, name: "Next Auth", path: "assets/next-auth.png" },
+      { id: 5, name: "Ant Design", path: "assets/ant-design.svg" },
+      { id: 6, name: "Module Federation", path: "assets/module_federation.png" },
+      { id: 7, name: "Zustand", path: "assets/zustand.svg" }
     ]
   },
   {
     id: 11,
-    name: "Cinemapedia",
-    description: "cinemapedia description",
-    learning: "cinemapedia learning",
-    technologies: [{
-      id: 1,
-      name: "Dart",
-      path: "assets/dart.svg"
-      },
-      {
-        id: 2,
-        name: "Flutter",
-        path: "assets/flutter.svg"
-      }]
-    },
+    name: 'Count TV',
+    description: "countv description",
+    learning: "countv learning",
+    technologies: [
+      { id: 1, name: "Typescript", path: "assets/typescript.svg" },
+      { id: 2, name: "React", path: "assets/react.svg" },
+      { id: 3, name: "Next.js", path: "assets/nextjs.svg" },
+      { id: 4, name: "Ant Design", path: "assets/ant-design.svg" },
+      { id: 5, name: "Tailwind CSS", path: "assets/tailwindcss.svg" },
+      { id: 6, name: "Redux", path: "assets/redux.svg" }
+    ]
+  },
+  {
+    id: 12,
+    name: "law firm assurance",
+    description: "law firm assurance description",
+    learning: "law firm assurance learning",
+    technologies: [
+      { id: 1, name: "Typescript", path: "assets/typescript.svg" },
+      { id: 2, name: "React", path: "assets/react.svg" },
+      { id: 3, name: "Next.js", path: "assets/nextjs.svg" },
+      { id: 4, name: "Golang", path: "assets/golang.svg" },
+      { id: 5, name: "Fiber", path: "assets/fiber.svg" },
+      { id: 6, name: "Postgres", path: "assets/postgresql.svg" }
+    ]
+  },
+  {
+    id: 13,
+    name: 'medicinal plant recommendation system',
+    description: 'medicinal plant recommendation system description',
+    learning: 'medicinal plant recommendation system learning',
+    href: 'https://github.com/guilleferrioldev/medicinal-plants',
+    technologies: [
+      { id: 1, name: "Typescript", path: "assets/typescript.svg" },
+      { id: 2, name: "React", path: "assets/react.svg" },
+      { id: 3, name: "Next.js", path: "assets/nextjs.svg" },
+      { id: 4, name: "Python", path: "assets/python.svg" },
+      { id: 5, name: "Fast Api", path: "assets/fastapi.svg" },
+      { id: 6, name: "Scikit-learn", path: "assets/scikit-learn.svg" }
+    ]
+  },
+  {
+    id: 14,
+    name: 'My Own X',
+    description: "my own x description",
+    learning: "my own x learning",
+    href: 'https://github.com/guilleferrioldev/my-own-x',
+    technologies: [
+      { id: 1, name: "Golang", path: "assets/golang.svg" },
+      { id: 2, name: "Python", path: "assets/python.svg" }
+    ]
+  },
+  {
+    id: 15,
+    name: "software engineer skills",
+    description: "software engineer skills description",
+    learning: "software engineer skills learning",
+    href: 'https://github.com/guilleferrioldev/software-engineer-skills',
+    technologies: [
+      { id: 1, name: "Python", path: "assets/python.svg" }
+    ]
+  },
+  {
+    id: 16,
+    name: 'programming problems solved',
+    description: "programming problems solved description",
+    learning: "programming problems solved learning",
+    href: 'https://github.com/guilleferrioldev/programming-problems-solved',
+    technologies: [
+      { id: 1, name: "Python", path: "assets/python.svg" }
+    ]
+  },
+  {
+    id: 17,
+    name: "addictions",
+    description: "addictions description",
+    learning: "addictions learning",
+    href: 'https://github.com/guilleferrioldev/adicciones-hv',
+    technologies: [
+      { id: 1, name: "Python", path: "assets/python.svg" },
+      { id: 2, name: "Pandas", path: "assets/pandas.svg" },
+      { id: 3, name: "NumPy", path: "assets/numpy.svg" },
+      { id: 4, name: "Matplotlib", path: "assets/matplotlib.svg" },
+      { id: 5, name: "Plotly", path: "assets/plotly.svg" }
+    ]
+  },
+  {
+    id: 18,
+    name: "climate change",
+    description: "climate change description",
+    learning: "climate change learning",
+    href: 'https://github.com/guilleferrioldev/study-of-climate-change-in-Cuba',
+    technologies: [
+      { id: 1, name: "Python", path: "assets/python.svg" },
+      { id: 2, name: "Pandas", path: "assets/pandas.svg" },
+      { id: 3, name: "NumPy", path: "assets/numpy.svg" },
+      { id: 4, name: "Matplotlib", path: "assets/matplotlib.svg" },
+      { id: 5, name: "Streamlit", path: "assets/streamlit.svg" }
+    ]
+  },
 ]

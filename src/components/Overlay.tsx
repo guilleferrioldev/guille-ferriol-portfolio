@@ -96,12 +96,28 @@ export default Overlay
 
 
 const AboutMeOverlay = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isEs = i18n.language?.startsWith("es");
+  const cvFile = isEs ? "Guillermo_Ferriol_CV_ES.pdf" : "Guillermo_Ferriol_CV_EN.pdf";
 
   return (
     <section className="absolute rounded-lg h-[80%] w-[80%] p-10 flex flex-col items-start justify-end bottom-0 md:bottom-20 left-5 md:left-20">
       <h1 className="text-2xl md:text-8xl font-extrabold mb-5">{t("hello")}</h1>
       <p className="text-sm md:text-2xl md:max-w-[55%] font-semibold">{t("presentation")}</p>
-      <DisplaySvgs svgs={myLinks} className="border-2 border-gray-900 border-opacity-80 hover:border-opacity-100 mt-5"/>
+      <div className="flex items-center flex-wrap gap-4 mt-5">
+        <DisplaySvgs svgs={myLinks} className="border-2 border-gray-900 border-opacity-80 hover:border-opacity-100"/>
+        <a
+          href={`/${cvFile}`}
+          download={cvFile}
+          className="pointer-events-auto inline-flex items-center gap-2 h-10 px-4 rounded-md text-sm font-semibold text-white bg-brown border-2 border-gray-900 border-opacity-80 hover:border-opacity-100 hover:bg-coffee transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          {t("download cv")}
+        </a>
+      </div>
     </section>)
 }

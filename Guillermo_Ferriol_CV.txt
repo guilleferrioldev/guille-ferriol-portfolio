@@ -1,0 +1,145 @@
+GUILLERMO FERRIOL RAVELO
+Full-Stack Software Engineer (Web & Mobile)
+La Habana, Cuba  |  +53 5478 4570  |  guillermoferriol00@gmail.com
+Portfolio: guille-ferriol-portfolio-v1.vercel.app
+GitHub: github.com/guilleferrioldev  |  LinkedIn: linkedin.com/in/guilleferriol
+
+================================================================
+SUMMARY
+================================================================
+Software engineer with 3+ years shipping production mobile and web
+products across mobility, IoT access control, insurtech, retail, and
+B2B supply. Specialized in cross-platform mobile (Flutter/Dart) and
+modern web (TypeScript, React, Next.js, NestJS, Node.js), with hands-on
+work in real-time geolocation and fleet tracking, RFID/IoT integration,
+microfrontend architecture, and machine-learning integration. I own
+features end to end: system design, scalable back ends (Go, FastAPI,
+GraphQL), and clean, maintainable UIs. I also work with AI coding agents
+(Claude Code, Codex, GitHub Copilot, OpenCode), applying spec-driven
+development, harness engineering, and loop engineering to ship faster
+with higher quality.
+
+================================================================
+EXPERIENCE
+================================================================
+
+PYXEL SOLUTIONS — Mobile / Full-Stack Developer          2025 - Present
+La Habana, Cuba
+- Develop cross-platform mobile applications in Flutter, owning features
+  end to end from UI to back-end integration, shipping 4+ production apps
+  spanning real-time mobility, on-demand services, POS, and ERP.
+- Build real-time geolocation, live-maps, and driver/rider matching
+  features and integrate GraphQL/REST back ends and third-party map
+  services, delivering low-latency tracking and updates, by designing
+  efficient data flows and state management on mobile.
+
+COUNTIGO — Frontend Developer                            2024 - 2025
+La Habana, Cuba
+- Architected a microfrontend platform (Module Federation) for
+  conditional-TV products, enabling 3+ independently deployable modules
+  and cutting release-coordination time by ~25%, by splitting a monolith
+  into modular React/Next.js apps.
+- Shipped multi-tenant management apps for conditional-TV stores and
+  channels, serving 5+ entities/channels, by building reusable, modular
+  UI with React/Next.js, Ant Design, Zustand, and Redux.
+
+BUFETES COLECTIVOS (ONBC) — Full Stack Developer         2023 - 2024
+La Habana, Cuba
+- Delivered a full-stack legal case & event management system
+  (React/Next.js front end, Go/Fiber + PostgreSQL back end) that
+  centralized firm operations, reducing manual processing time by ~30%,
+  by automating core administrative workflows.
+- Integrated a machine-learning model into the firm's workflow,
+  automating a key classification task over thousands of records, by
+  building the data pipeline and model-serving layer.
+
+================================================================
+PROJECTS
+================================================================
+Mobility & Real-Time
+- FAIND — Ride-hailing platform (Uber-style): real-time driver/rider
+  matching, live geolocation, and multi-operator fleet control.
+  Flutter, GraphQL, real-time maps.
+- Trackmont — Satellite GPS fleet & asset tracking: live map of the
+  entire fleet, instant alerts, and data-driven telematics, all from
+  mobile. Flutter, Node.js, maps, real-time location streaming.
+
+IoT & Access Control
+- SEGUIPASS — Smart access control for gated communities and private
+  condos: RFID-TAG vehicle authorization, QR passes for visitors and
+  services, real-time entry/exit notifications, access history, and
+  misuse reporting. Flutter + RFID/IoT integration.
+
+Insurtech & On-Demand
+- DelToro Insurance — Bilingual (EN/ES) insurance platform: instant free
+  quotes (auto, health, home, life), agent connection, and lead capture.
+  Flutter, internationalization.
+- Charge2Go — On-demand EV-charging app: request a mobile charger to
+  your location. Flutter, geolocation.
+
+Business Systems
+- ArgoPos — Point-of-sale (POS) app: sales, checkout, and inventory.
+  Flutter.
+- MHHome — All-in-one home-improvement ERP app covering interior and
+  exterior projects, from protection to design. Flutter.
+- Decorect (web) — Premium tile-design supplier: online catalog, live
+  inventory, and online ordering. React / Next.js, NestJS.
+- Ardent (web) — B2B distribution platform for hotels & restaurants:
+  design, store, and deliver branded essentials. React / Next.js, NestJS.
+
+Broadcast / Conditional TV
+- Suite TV (web) — Management system for a conditional-TV store and its
+  products, built on a microfrontend architecture for modularity and
+  scalability. React / Next.js, Module Federation.
+- Count TV (web) — Multi-tenant management system for conditional-TV
+  channels, letting multiple entities manage and customize their
+  internal channels. React / Next.js.
+
+More projects (ML, systems, data) on GitHub — github.com/guilleferrioldev
+
+================================================================
+SKILLS
+================================================================
+Languages:     TypeScript, Python, Go, Dart, Bash
+Mobile:        Flutter, real-time geolocation & maps, RFID/IoT integration
+Frontend:      React, Next.js, Module Federation (microfrontends), Redux,
+               Zustand, Tailwind CSS, Ant Design, Three.js, GSAP
+Backend:       Node.js, NestJS, Go (Fiber, gRPC, NATS), FastAPI,
+               REST & GraphQL APIs
+Data / ML:     Scikit-learn, Pandas, NumPy, Matplotlib, Plotly, Streamlit
+Databases:     PostgreSQL, SQLite, Cassandra, ScyllaDB
+Infra / Tools: Docker, GitHub Actions (CI/CD), Vercel, Kafka, RabbitMQ,
+               Git, Postman, Linux (Arch)
+Testing:       Automated testing (unit & integration)
+Engineering:   System Design, Software Architecture, Real-Time Systems,
+               Design Patterns, SOLID/KISS/YAGNI/GRASP, Data Structures &
+               Algorithms, OOP / Functional Programming
+
+================================================================
+AI-ASSISTED DEVELOPMENT
+================================================================
+Hands-on orchestrating AI coding agents in production workflows — not
+just prompting, but engineering the systems around them.
+
+Tools:      Claude Code, Codex, GitHub Copilot, OpenCode, Ollama (local LLMs)
+Practices:
+- Spec-Driven Development — treat a structured spec as the single source
+  of truth and drive the agent to generate, test, and validate against
+  it; focus on intent and acceptance criteria ("what") over manual coding.
+- Harness Engineering — design the environment, constraints, and feedback
+  loops around an agent (Agent = Model + Harness) so it ships reliable
+  code at scale with less review toil.
+- Loop Engineering — design autonomous act → observe → decide → repeat
+  loops (ReAct pattern) with clear goals and stopping conditions so
+  agents iterate and self-correct toward a target.
+
+================================================================
+EDUCATION
+================================================================
+University of Havana (MATCOM) — Data Science              2022 - 2024
+Technological University of Havana (CUJAE) — Architecture  2019 - 2022
+
+================================================================
+LANGUAGES
+================================================================
+Spanish (native), English (professional working proficiency)

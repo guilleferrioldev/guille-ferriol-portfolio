@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { CanvasLoader, Scene, ShowSkills, TechnicalSkills, SoftSkills } from "../components";
+import { CanvasLoader, Scene, ShowSkills, TechnicalSkills, SoftSkills, AISkills } from "../components";
 import { myDatabases, myLanguages, myOS, myOthers } from "../utils/skills";
 import { Suspense } from "react";
 import { ScenePaths, scenes } from "../utils/scenes";
@@ -16,9 +16,10 @@ const SkillsPage = () => {
                 <ShowSkills skills={myOthers} title={t("others")}/>
                 <ShowSkills skills={myOS} title={t("operating systems")}/>
             </div>
-            <div className="col-span-1 xl:row-span-4 bg-coffee rounded-lg p-5 md:overflow-y-scroll md:overflow-x-auto">
+            <div className="col-span-1 xl:row-span-4 bg-coffee rounded-lg p-4 overflow-hidden">
                 <TechnicalSkills />
                 <SoftSkills />
+                <AISkills />
             </div>
             <div className="col-span-1 xl:row-span-4 bg-coffee rounded-lg min-h-[50vh]">
                 <Canvas shadows className='rounded-lg'>

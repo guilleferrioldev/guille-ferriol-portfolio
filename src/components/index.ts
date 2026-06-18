@@ -9,5 +9,6 @@ export { default as DisplaySvgs } from "./DisplaySvgs";
 export { default as ShowSkills } from "./Skills/ShowSkills";
 export { default as TechnicalSkills } from "./Skills/TechnicalSkills";
 export { default as SoftSkills } from "./Skills/SoftSkills";
+export { default as AISkills } from "./Skills/AISkills";
 export { default as CanvasLoader } from "./Loader";
 export { default as SelectLanguage } from "./SelectLanguage";

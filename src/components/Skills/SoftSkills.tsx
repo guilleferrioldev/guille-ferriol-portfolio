@@ -5,8 +5,8 @@ const SoftSkills = () => {
 
   return (
     <>
-            <h1 className="md:text-2xl font-semibold text-brown mt-5">{t("soft skills")}</h1>
-            <ul className="list-disc pl-5">
+            <h1 className="md:text-lg font-semibold text-brown mt-3">{t("soft skills")}</h1>
+            <ul className="list-disc pl-5 text-sm leading-snug">
                 <li> {t("languages")} </li>
                 <li> {t("troubleshooting")} </li>
                 <li> {t("teamwork")} </li>
