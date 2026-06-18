@@ -37,7 +37,7 @@ COUNTIGO — Frontend Developer                            2024 - 2025
 La Habana, Cuba
 - Architected a microfrontend platform (Module Federation) for
   conditional-TV products, enabling 3+ independently deployable modules
-  and cutting release-coordination time by ~25%, by splitting a monolith
+  and cutting release-coordination time, by splitting a monolith
   into modular React/Next.js apps.
 - Shipped multi-tenant management apps for conditional-TV stores and
   channels, serving 5+ entities/channels, by building reusable, modular
@@ -47,7 +47,7 @@ BUFETES COLECTIVOS (ONBC) — Full Stack Developer         2023 - 2024
 La Habana, Cuba
 - Delivered a full-stack legal case & event management system
   (React/Next.js front end, Go/Fiber + PostgreSQL back end) that
-  centralized firm operations, reducing manual processing time by ~30%,
+  centralized firm operations, reducing manual processing time,
   by automating core administrative workflows.
 - Integrated a machine-learning model into the firm's workflow,
   automating a key classification task over thousands of records, by
