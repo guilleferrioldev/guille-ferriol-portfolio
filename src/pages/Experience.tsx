@@ -9,7 +9,7 @@ const ExperiencePage = () => {
 
     return (
         <section className="grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-[85%] m-5 md:m-20 mt-0 xl:mt-0 overflow-y-scroll pointer-events-auto text-gray-900">
-            <div className="col-span-1 xl:col-start-1 xl:row-start-1 xl:row-span-4 bg-my-blue rounded-lg min-h-[50vh] xl:min-h-0">
+            <div className="col-span-1 xl:col-start-1 xl:row-start-1 xl:row-span-4 bg-my-blue rounded-lg xl:min-h-0">
                   <Slider />
             </div>
             <div className="col-span-1 xl:col-start-3 xl:row-start-1 xl:row-span-6 bg-my-blue rounded-lg cursor-pointer xl:min-h-0 xl:overflow-y-auto xl:overflow-x-hidden">

@@ -44,14 +44,40 @@ const Slider = () => {
       }, [resetTimeout]);
 
     useGSAP(() => {
-        gsap.fromTo(`.animatedText`, { opacity: 0 }, { opacity: 1, duration: 1, stagger: 0.2, ease: 'power2.inOut' });
+        // Animate the whole project block as one unit (fade + slide-up). The old
+        // per-line stagger made the title pop in before the body, which read oddly.
+        gsap.fromTo(
+          `.animatedText`,
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', stagger: 0 }
+        );
     }, [selectedProjectIndex]);
 
     const currentProject = myProjects[selectedProjectIndex];
 
+    // Horizontal swipe inside the card flips between projects (mobile). It's scoped to
+    // this element, so it never collides with the page's vertical slide navigation.
+    const swipeStart = useRef<{ x: number; y: number } | null>(null);
+    const handleSwipeStart = (e: React.TouchEvent) => {
+      swipeStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    };
+    const handleSwipeEnd = (e: React.TouchEvent) => {
+      if (!swipeStart.current) return;
+      const dx = e.changedTouches[0].clientX - swipeStart.current.x;
+      const dy = e.changedTouches[0].clientY - swipeStart.current.y;
+      swipeStart.current = null;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) >= 50) {
+        handleNavigation(dx < 0 ? 'next' : 'previous'); // left => next, right => previous
+      }
+    };
+
     return (
-      <div className="w-full h-full flex flex-col justify-between items-center p-5 relative"> 
-        <section className="w-full flex flex-col gap-5 text-white-600 mt-5 mb-5 flex-1 min-h-0 overflow-y-auto overflow-x-hidden">
+      <div
+        className="w-full h-auto xl:h-full flex flex-col justify-between items-center p-5 relative"
+        onTouchStart={handleSwipeStart}
+        onTouchEnd={handleSwipeEnd}
+      >
+        <section className="w-full flex flex-col gap-5 text-white-600 mt-5 mb-5 overflow-x-hidden xl:flex-1 xl:min-h-0 xl:overflow-y-auto">
           <p className="text-2xl font-semibold animatedText">{t(currentProject.name)}</p>
           <p className="animatedText">{t(currentProject.description)}</p>
           <p className="animatedText">{t(currentProject.learning)}</p>

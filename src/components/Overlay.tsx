@@ -13,7 +13,8 @@ export const transitioningAtom = atom(false);
 
 const TRANSITION_MS = 2600;
 const WHEEL_THRESHOLD = 120; // accumulated deltaY before a wheel gesture changes slide
-const SWIPE_THRESHOLD = 60; // px of horizontal travel before a swipe changes slide
+const TOUCH_OVERSCROLL_THRESHOLD = 50; // px pulled past a scrolled panel edge before a vertical touch changes slide
+const TOUCH_FREE_THRESHOLD = 170; // px of vertical travel on a slide with no scroll panel (e.g. the 3D slide) before it changes
 const BOUNDARY_GRACE_MS = 500; // after the inner panel hits its edge, hold before a wheel can change slide
 const WHEEL_IDLE_MS = 220; // gap with no wheel events that begins a fresh gesture
 
@@ -38,6 +39,30 @@ const canInnerScroll = (start: EventTarget | null, dir: number): boolean => {
   return false;
 };
 
+// Touch needs to tell three states apart, not two:
+//   "can"  -> a scroll panel can still scroll in `dir` (let native scrolling run)
+//   "edge" -> a scroll panel exists but is at its boundary (small over-pull flips)
+//   "none" -> no scroll panel here at all (e.g. the 3D slide; needs a big deliberate swipe)
+const touchScrollState = (start: EventTarget | null, dir: number): "can" | "edge" | "none" => {
+  let el = start as HTMLElement | null;
+  let foundPanel = false;
+  while (el && el !== document.body) {
+    const overflowY = getComputedStyle(el).overflowY;
+    if (
+      (overflowY === "auto" || overflowY === "scroll") &&
+      el.scrollHeight > el.clientHeight + 1
+    ) {
+      foundPanel = true;
+      const atTop = el.scrollTop <= 0;
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+      if (dir > 0 && !atBottom) return "can";
+      if (dir < 0 && !atTop) return "can";
+    }
+    el = el.parentElement;
+  }
+  return foundPanel ? "edge" : "none";
+};
+
 interface Props {
     isLoading: boolean
 }
@@ -47,12 +72,15 @@ const Overlay = ({ isLoading }: Props) => {
     const [slide, setSlide] = useAtom(slideAtom);
     const [displaySlide, setDisplaySlide] = useState(slide);
     const [visible, setVisible] = useState(false);
+    const [atEnd, setAtEnd] = useState(false); // inner panel scrolled to its bottom (slides 1 & 2)
 
     const lockRef = useRef(false);   // synchronous lock for the moment a nav fires
     const wheelAccum = useRef(0);
     const lastInnerScroll = useRef(0); // timestamp of the last inner-panel scroll
     const lastWheel = useRef(0);       // timestamp of the last wheel event
     const touchStart = useRef<{ x: number; y: number } | null>(null);
+    const lastTouchY = useRef(0);      // last touchmove Y, for incremental drag delta
+    const touchAccum = useRef(0);      // over-pull past a panel edge, before a slide flip
 
     // Mirror the camera-animation flag into a ref so the event listeners
     // (keydown/wheel/touch) always read its latest value.
@@ -91,6 +119,20 @@ const Overlay = ({ isLoading }: Props) => {
           : (prev > 0 ? prev - 1 : scenes.length - 1)
       );
     }, [setSlide]);
+
+    // Track whether the current slide's scrollable panel is at its bottom, so the
+    // "swipe up" hint on slides 1 & 2 only appears once there's nothing left to read.
+    useEffect(() => { setAtEnd(false); }, [slide]);
+    useEffect(() => {
+      const onScroll = (event: Event) => {
+        const el = event.target as HTMLElement | null;
+        if (!el || el.scrollHeight === undefined || el.scrollHeight <= el.clientHeight + 1) return;
+        setAtEnd(el.scrollTop + el.clientHeight >= el.scrollHeight - 4);
+      };
+      // capture: scroll events don't bubble, so listen on the way down.
+      window.addEventListener('scroll', onScroll, { capture: true, passive: true });
+      return () => window.removeEventListener('scroll', onScroll, { capture: true });
+    }, []);
 
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
@@ -136,25 +178,64 @@ const Overlay = ({ isLoading }: Props) => {
       return () => window.removeEventListener('wheel', handleWheel);
     }, [go]);
 
-    // Touch: a horizontal swipe moves between slides; vertical drags fall through
-    // to native scrolling of the inner panel.
+    // Touch: a horizontal swipe moves between slides; a vertical drag scrolls the
+    // inner panel natively, and once that panel is at its edge, continuing to pull
+    // advances the slide (the touch equivalent of the wheel-to-next behaviour, so
+    // reaching the bottom on a phone flips to the next slide instead of dead-ending).
     useEffect(() => {
       const handleTouchStart = (event: TouchEvent) => {
         touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+        lastTouchY.current = event.touches[0].clientY;
+        touchAccum.current = 0;
       };
-      const handleTouchEnd = (event: TouchEvent) => {
-        if (!touchStart.current || lockRef.current) return;
-        const dx = event.changedTouches[0].clientX - touchStart.current.x;
-        const dy = event.changedTouches[0].clientY - touchStart.current.y;
-        touchStart.current = null;
-        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) >= SWIPE_THRESHOLD) {
-          go(dx < 0 ? 1 : -1); // swipe left => next, swipe right => previous
+      const handleTouchMove = (event: TouchEvent) => {
+        if (lockRef.current || !touchStart.current) return;
+        const x = event.touches[0].clientX;
+        const y = event.touches[0].clientY;
+        const totalDx = x - touchStart.current.x;
+        const totalDy = y - touchStart.current.y;
+        const incDy = y - lastTouchY.current;
+        lastTouchY.current = y;
+
+        // Horizontal-dominant gesture: leave it to the swipe handler in touchend.
+        if (Math.abs(totalDx) > Math.abs(totalDy)) {
+          touchAccum.current = 0;
+          return;
+        }
+        if (Math.abs(incDy) < 1) return;
+        // Finger up (incDy < 0) scrolls the panel down (dir 1); finger down => up (dir -1).
+        const dir = incDy < 0 ? 1 : -1;
+        const state = touchScrollState(event.target, dir);
+
+        // Inner panel can still scroll in that direction: let native scrolling run.
+        if (state === "can") {
+          lastInnerScroll.current = Date.now();
+          touchAccum.current = 0;
+          return;
+        }
+        // A panel just reached its edge: brief grace so the flick that finished the
+        // scroll doesn't immediately flip the slide before you read the last line.
+        if (state === "edge" && Date.now() - lastInnerScroll.current < BOUNDARY_GRACE_MS) {
+          touchAccum.current = 0;
+          return;
+        }
+        // No scroll panel here (the 3D slide): demand a big deliberate swipe so a
+        // small gesture while looking at the model doesn't change slides.
+        const threshold = state === "none" ? TOUCH_FREE_THRESHOLD : TOUCH_OVERSCROLL_THRESHOLD;
+        touchAccum.current += -incDy;
+        if (Math.abs(touchAccum.current) >= threshold) {
+          go(touchAccum.current > 0 ? 1 : -1);
         }
       };
+      const handleTouchEnd = () => {
+        touchStart.current = null;
+      };
       window.addEventListener('touchstart', handleTouchStart, { passive: true });
+      window.addEventListener('touchmove', handleTouchMove, { passive: true });
       window.addEventListener('touchend', handleTouchEnd);
       return () => {
         window.removeEventListener('touchstart', handleTouchStart);
+        window.removeEventListener('touchmove', handleTouchMove);
         window.removeEventListener('touchend', handleTouchEnd);
       };
     }, [go]);
@@ -181,9 +262,32 @@ const Overlay = ({ isLoading }: Props) => {
             { displaySlide === 2 && <SkillsPage /> }
           </section>
 
-          <section className="absolute top-0 bottom-0 left-0 right-0 flex-1 flex items-center justify-between p-4">
+          <section className="absolute top-0 bottom-0 left-0 right-0 flex-1 hidden md:flex items-center justify-between p-4">
           {!isLoading && <Arrows onClickLeft={() => go(-1)} onClickRight={() => go(1)} />}
           </section>
+
+          {!isLoading && (displaySlide === 0 || ((displaySlide === 1 || displaySlide === 2) && atEnd)) && (
+            <div
+              className={`md:hidden absolute bottom-10 right-6 flex flex-col items-center gap-1 animate-swipe-bob pointer-events-none ${
+                displaySlide === 0 ? "text-black/80" : "text-white"
+              }`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-7 h-7"
+              >
+                <path d="M12 19V5" />
+                <path d="m5 12 7-7 7 7" />
+              </svg>
+              <span className="text-xs font-semibold whitespace-nowrap">{t("swipe up")}</span>
+            </div>
+          )}
         </main>
     );
   };
@@ -198,10 +302,10 @@ const AboutMeOverlay = () => {
   const cvFile = isEs ? "Guillermo_Ferriol_CV_ES.pdf" : "Guillermo_Ferriol_CV_EN.pdf";
 
   return (
-    <section className="absolute rounded-lg h-[80%] w-[80%] p-10 flex flex-col items-start justify-end bottom-0 md:bottom-20 left-5 md:left-20">
-      <h1 className="text-2xl md:text-8xl font-extrabold mb-5">{t("hello")}</h1>
-      <p className="text-sm md:text-2xl md:max-w-[55%] font-semibold">{t("presentation")}</p>
-      <div className="flex items-center flex-wrap gap-4 mt-5">
+    <section className="absolute rounded-lg h-[80%] w-[85%] p-5 md:p-10 flex flex-col items-start justify-end bottom-0 md:bottom-20 left-5 md:left-20">
+      <h1 className="text-xl md:text-8xl font-extrabold mb-2 md:mb-5 leading-tight">{t("hello")}</h1>
+      <p className="text-sm md:text-2xl md:max-w-[55%] font-semibold leading-snug">{t("presentation")}</p>
+      <div className="flex items-center flex-wrap gap-3 md:gap-4 mt-4 md:mt-5">
         <DisplaySvgs svgs={myLinks} className="border-2 border-gray-900 border-opacity-80 hover:border-opacity-100"/>
         <a
           href={`/${cvFile}`}
