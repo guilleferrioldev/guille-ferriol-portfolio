@@ -14,30 +14,21 @@ export default defineConfig({
       : undefined,
   ],
   build: {
+    // Bump the warning ceiling: this is a 3D app; three.js dominates the
+    // vendor bundle and there is nothing meaningful to split off it.
+    chunkSizeWarningLimit: 1600,
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (!id.includes('node_modules')) return
-          // Keep ALL of three (incl. examples/jsm + three-stdlib) in ONE chunk.
-          // Splitting three creates duplicate THREE instances and breaks r3f
-          // instanceof checks at runtime.
-          if (
-            id.includes('/three/') ||
-            id.includes('three-stdlib') ||
-            id.includes('three-mesh-bvh')
-          )
-            return 'three'
-          if (id.includes('@react-three') || id.includes('@react-spring'))
-            return 'r3f'
-          // Must come before the react-vendor catch-all (react-i18next).
-          if (id.includes('i18next')) return 'i18n'
-          if (id.includes('gsap')) return 'gsap'
-          if (
-            id.includes('react-dom') ||
-            id.includes('/scheduler/') ||
-            id.includes('/react/')
-          )
-            return 'react-vendor'
+          // All third-party code goes in ONE vendor chunk, separate from app
+          // code. Splitting vendor libraries across multiple chunks triggered
+          // CJS-interop init-order races (a consumer chunk evaluating before
+          // the chunk that defines React / THREE), which threw
+          // "Cannot read properties of undefined" and blanked the page. A
+          // single vendor chunk keeps all third-party init order intra-chunk
+          // (Rollup orders it correctly) while still letting the browser cache
+          // vendor separately from frequently-changing app code.
+          if (id.includes('node_modules')) return 'vendor'
         },
       },
     },
