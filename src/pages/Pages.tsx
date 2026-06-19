@@ -1,24 +1,22 @@
-import { Dodecahedron, Environment, Grid, MeshDistortMaterial } from "@react-three/drei";
+import { Dodecahedron, Environment, Grid, Lightformer, MeshDistortMaterial, useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import { useControls } from "leva";
-import { scenes } from "../utils/scenes";
+import { scenes, ScenePaths } from "../utils/scenes";
 import { CameraHandler } from "../components";
 import { AboutMePage } from ".";
 
 export const Pages = () => {
     const viewport = useThree((state) => state.viewport);
-    const { slideDistance } = useControls({
-      slideDistance: {
-        value: 1,
-        min: 0,
-        max: 10,
-      },
-    });
+    const slideDistance = 1;
 
     return (
       <>
         <ambientLight intensity={0.2} />
-        <Environment preset={"city"} />
+        {/* Procedural IBL — no remote HDR fetch (replaces preset="city") */}
+        <Environment resolution={256}>
+          <Lightformer intensity={2} position={[0, 5, -5]} scale={[10, 10, 1]} />
+          <Lightformer intensity={1} position={[5, 1, 1]} scale={[10, 10, 1]} color="white" />
+          <Lightformer intensity={1} position={[-5, -1, 1]} scale={[10, 10, 1]} color="white" />
+        </Environment>
         <CameraHandler slideDistance={slideDistance} />
         {/* MAIN WORLD */}
         <group>
@@ -59,5 +57,8 @@ export const Pages = () => {
       </>
     );
   };
+
+// Warm the first-visible model (slide 0). Same key string Scene's useGLTF uses.
+useGLTF.preload(ScenePaths.ABOUT_ME);
 
 export default Pages;

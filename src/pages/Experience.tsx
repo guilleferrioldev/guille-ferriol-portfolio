@@ -12,10 +12,10 @@ const ExperiencePage = () => {
             <div className="col-span-1 xl:col-start-1 xl:row-start-1 xl:row-span-4 bg-my-blue rounded-lg min-h-[50vh] xl:min-h-0">
                   <Slider />
             </div>
-            <div className="col-span-1 xl:col-start-3 xl:row-start-1 xl:row-span-6 bg-my-blue rounded-lg cursor-pointer min-h-[50vh] xl:min-h-0 md:overflow-y-scroll md:overflow-x-auto">
+            <div className="col-span-1 xl:col-start-3 xl:row-start-1 xl:row-span-6 bg-my-blue rounded-lg cursor-pointer xl:min-h-0 xl:overflow-y-auto xl:overflow-x-hidden">
                 <Timeline/>
             </div>
-            <div className="col-span-1 xl:col-start-2 xl:row-start-1 xl:row-span-4 bg-gray-900 rounded-lg cursor-pointer min-h-[30vh]">
+            <div className="col-span-1 xl:col-start-2 xl:row-start-1 xl:row-span-4 bg-gray-900 rounded-lg cursor-pointer relative overflow-hidden min-h-[30vh] h-[40vh] xl:h-auto">
             <Canvas className='rounded-lg'>
             <ambientLight intensity={Math.PI} />
             <directionalLight position={[10, 10, 5]} />

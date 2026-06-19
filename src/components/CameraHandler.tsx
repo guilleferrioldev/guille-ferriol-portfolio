@@ -1,7 +1,6 @@
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import {  useEffect, useRef } from "react";
-import { slideAtom } from "./Overlay";
-import { useControls } from "leva";
+import { slideAtom, transitioningAtom } from "./Overlay";
 import { useThree } from "@react-three/fiber";
 import {
   CameraControls,
@@ -12,45 +11,45 @@ const CameraHandler = ({ slideDistance }: { slideDistance: number }) => {
     const viewport = useThree((state) => state.viewport);
     const cameraControls = useRef<CameraControls | null>(null);
     const [slide] = useAtom(slideAtom);
+    const setTransitioning = useSetAtom(transitioningAtom);
     const lastSlide = useRef(0);
-  
-    const { dollyDistance } = useControls({
-      dollyDistance: {
-        value: 10,
-        min: 0,
-        max: 50,
-      },
-    });
-  
+
+    const dollyDistance = 10;
+
     const moveToSlide = async () => {
-      await cameraControls.current?.setLookAt(
-        lastSlide.current * (viewport.width + slideDistance),
-        3,
-        dollyDistance,
-        lastSlide.current * (viewport.width + slideDistance),
-        0,
-        0,
-        true
-      );
-      await cameraControls.current?.setLookAt(
-        (slide + 1) * (viewport.width + slideDistance),
-        1,
-        dollyDistance,
-        slide * (viewport.width + slideDistance),
-        0,
-        0,
-        true
-      );
-  
-      await cameraControls.current?.setLookAt(
-        slide * (viewport.width + slideDistance),
-        0,
-        5,
-        slide * (viewport.width + slideDistance),
-        0,
-        0,
-        true
-      );
+      setTransitioning(true);
+      try {
+        await cameraControls.current?.setLookAt(
+          lastSlide.current * (viewport.width + slideDistance),
+          3,
+          dollyDistance,
+          lastSlide.current * (viewport.width + slideDistance),
+          0,
+          0,
+          true
+        );
+        await cameraControls.current?.setLookAt(
+          (slide + 1) * (viewport.width + slideDistance),
+          1,
+          dollyDistance,
+          slide * (viewport.width + slideDistance),
+          0,
+          0,
+          true
+        );
+
+        await cameraControls.current?.setLookAt(
+          slide * (viewport.width + slideDistance),
+          0,
+          5,
+          slide * (viewport.width + slideDistance),
+          0,
+          0,
+          true
+        );
+      } finally {
+        setTransitioning(false);
+      }
     };
   
     useEffect(() => {

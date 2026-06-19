@@ -114,6 +114,4 @@ const Scene = ({ mainColor, path, ...props }: Props) => {
   );
 };
 
-useGLTF.preload("/models/abut_me_scene.glb");
-
 export default Scene;

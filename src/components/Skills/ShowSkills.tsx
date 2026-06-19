@@ -4,7 +4,7 @@ import DisplaySvgs from "../DisplaySvgs";
 const ShowSkills = ({ skills, title }: { skills: Skill[], title: string }) => {
     return (
         <div className="flex flex-col gap-5 text-white-600 mt-5 mb-5">
-            <h1 className="md:text-2xl font-semibold text-brown">{title}</h1>
+            <h1 className="md:text-2xl font-semibold text-brown xl:sticky xl:top-0 bg-coffee py-2 xl:z-10">{title}</h1>
            {
             skills.map((skill, index) => (
                 <div key={index} className={skill.languange && "flex gap-5"}>

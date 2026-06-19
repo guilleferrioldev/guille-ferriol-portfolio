@@ -1,5 +1,5 @@
-import { atom, useAtom } from "jotai";
-import { useEffect, useState } from "react";
+import { atom, useAtom, useAtomValue } from "jotai";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { scenes } from "../utils/scenes";
 import { ExperiencePage, SkillsPage } from "../pages";
 import { Arrows, DisplaySvgs, SelectLanguage } from ".";
@@ -7,6 +7,36 @@ import { myLinks } from "../utils/aboutMe";
 import { useTranslation } from "react-i18next";
 
 export const slideAtom = atom(0);
+// True while the camera is mid-animation between slides. Navigation stays
+// locked until this clears, so a fast input can't overlap the camera pan.
+export const transitioningAtom = atom(false);
+
+const TRANSITION_MS = 2600;
+const WHEEL_THRESHOLD = 120; // accumulated deltaY before a wheel gesture changes slide
+const SWIPE_THRESHOLD = 60; // px of horizontal travel before a swipe changes slide
+const BOUNDARY_GRACE_MS = 500; // after the inner panel hits its edge, hold before a wheel can change slide
+const WHEEL_IDLE_MS = 220; // gap with no wheel events that begins a fresh gesture
+
+// Walk up from `start`; return true if a scrollable ancestor can still scroll in
+// `dir` (down = 1, up = -1). Used so the inner panel scrolls to its end before a
+// wheel gesture flips to the next/previous slide.
+const canInnerScroll = (start: EventTarget | null, dir: number): boolean => {
+  let el = start as HTMLElement | null;
+  while (el && el !== document.body) {
+    const overflowY = getComputedStyle(el).overflowY;
+    if (
+      (overflowY === "auto" || overflowY === "scroll") &&
+      el.scrollHeight > el.clientHeight + 1
+    ) {
+      const atTop = el.scrollTop <= 0;
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+      if (dir > 0 && !atBottom) return true;
+      if (dir < 0 && !atTop) return true;
+    }
+    el = el.parentElement;
+  }
+  return false;
+};
 
 interface Props {
     isLoading: boolean
@@ -17,50 +47,117 @@ const Overlay = ({ isLoading }: Props) => {
     const [slide, setSlide] = useAtom(slideAtom);
     const [displaySlide, setDisplaySlide] = useState(slide);
     const [visible, setVisible] = useState(false);
-    const [isTransitioning, setIsTransitioning] = useState(false);
+
+    const lockRef = useRef(false);   // synchronous lock for the moment a nav fires
+    const wheelAccum = useRef(0);
+    const lastInnerScroll = useRef(0); // timestamp of the last inner-panel scroll
+    const lastWheel = useRef(0);       // timestamp of the last wheel event
+    const touchStart = useRef<{ x: number; y: number } | null>(null);
+
+    // Mirror the camera-animation flag into a ref so the event listeners
+    // (keydown/wheel/touch) always read its latest value.
+    const transitioning = useAtomValue(transitioningAtom);
+    const cameraBusy = useRef(false);
+    useEffect(() => { cameraBusy.current = transitioning; }, [transitioning]);
 
     useEffect(() => {
-      setTimeout(() => {
-        setVisible(true);
-      }, 0);
+      const id = setTimeout(() => setVisible(true), 0);
+      return () => clearTimeout(id);
     }, []);
-  
+
+    // Cross-fade the overlay and hold a lock for the whole transition so any
+    // input fired mid-transition is ignored (only one step per gesture).
     useEffect(() => {
-     setIsTransitioning(true);
+     lockRef.current = true;
      setVisible(false);
-    setTimeout(() => {
+     const id = setTimeout(() => {
        setDisplaySlide(slide);
        setVisible(true);
-       setIsTransitioning(false)
-    }, 2600);
+       lockRef.current = false;
+       wheelAccum.current = 0;
+    }, TRANSITION_MS);
+    return () => clearTimeout(id);
   }, [slide]);
+
+    // Single guarded navigation entry point shared by arrows, keys, wheel, swipe.
+    const go = useCallback((dir: number) => {
+      // Blocked while the overlay lock is held OR the camera is still animating.
+      if (lockRef.current || cameraBusy.current) return;
+      lockRef.current = true;               // synchronous lock => exactly one step
+      wheelAccum.current = 0;
+      setSlide((prev) =>
+        dir > 0
+          ? (prev < scenes.length - 1 ? prev + 1 : 0)
+          : (prev > 0 ? prev - 1 : scenes.length - 1)
+      );
+    }, [setSlide]);
 
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
-        if (isTransitioning) return;
+        if (event.key === 'ArrowLeft') go(-1);
+        else if (event.key === 'ArrowRight') go(1);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [go]);
 
-        if (event.key === 'ArrowLeft') {
-          setSlide((prev) => (prev > 0 ? prev - 1 : scenes.length - 1));
-        } else if (event.key === 'ArrowRight') {
-          setSlide((prev) => (prev < scenes.length - 1 ? prev + 1 : 0));
+    // Wheel: vertical scroll moves between slides, but only once the inner panel
+    // (e.g. the Skills list) has scrolled to its top/bottom boundary.
+    useEffect(() => {
+      const handleWheel = (event: WheelEvent) => {
+        if (lockRef.current) return;
+        const dir = event.deltaY > 0 ? 1 : -1;
+        const now = Date.now();
+
+        // Inner panel can still scroll: let it, and remember when it last did.
+        if (canInnerScroll(event.target, dir)) {
+          lastInnerScroll.current = now;
+          wheelAccum.current = 0;
+          return;
+        }
+        // Just reached the panel's edge: hold a grace window so the momentum
+        // that finished the scroll doesn't flip the slide before you finish
+        // reading the last line. A deliberate scroll after the pause advances.
+        if (now - lastInnerScroll.current < BOUNDARY_GRACE_MS) {
+          wheelAccum.current = 0;
+          return;
+        }
+        // A pause since the last wheel event starts a fresh accumulation.
+        if (now - lastWheel.current > WHEEL_IDLE_MS) wheelAccum.current = 0;
+        lastWheel.current = now;
+
+        wheelAccum.current += event.deltaY;
+        if (Math.abs(wheelAccum.current) >= WHEEL_THRESHOLD) {
+          event.preventDefault();
+          go(wheelAccum.current > 0 ? 1 : -1);
         }
       };
-  
-      window.addEventListener('keydown', handleKeyDown);
-  
-      return () => {
-        window.removeEventListener('keydown', handleKeyDown);
-      };
-    }, [setSlide, isTransitioning]);
+      window.addEventListener('wheel', handleWheel, { passive: false });
+      return () => window.removeEventListener('wheel', handleWheel);
+    }, [go]);
 
-    const handleArrowClickLeft = () => {
-      if (isTransitioning) return;
-      setSlide((prev) => (prev > 0 ? prev - 1 : scenes.length - 1));
-    }
-    const handleArrowClickRight = () => {
-      if (isTransitioning) return;
-      setSlide((prev) => (prev < scenes.length - 1 ? prev + 1 : 0));
-    }
+    // Touch: a horizontal swipe moves between slides; vertical drags fall through
+    // to native scrolling of the inner panel.
+    useEffect(() => {
+      const handleTouchStart = (event: TouchEvent) => {
+        touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+      };
+      const handleTouchEnd = (event: TouchEvent) => {
+        if (!touchStart.current || lockRef.current) return;
+        const dx = event.changedTouches[0].clientX - touchStart.current.x;
+        const dy = event.changedTouches[0].clientY - touchStart.current.y;
+        touchStart.current = null;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) >= SWIPE_THRESHOLD) {
+          go(dx < 0 ? 1 : -1); // swipe left => next, swipe right => previous
+        }
+      };
+      window.addEventListener('touchstart', handleTouchStart, { passive: true });
+      window.addEventListener('touchend', handleTouchEnd);
+      return () => {
+        window.removeEventListener('touchstart', handleTouchStart);
+        window.removeEventListener('touchend', handleTouchEnd);
+      };
+    }, [go]);
 
 
     return (
@@ -69,7 +166,7 @@ const Overlay = ({ isLoading }: Props) => {
             visible ? "" : "opacity-0"
           } transition-opacity duration-1000`}
         >
-          
+
           <section className="absolute top-0 bottom-0 left-0 right-0 w-full h-full pt-0 flex flex-col">
             <div className={`w-full text-small md:text-2xl font-bold md:font-extrabold flex items-center justify-between h-[10%] top-0 p-5 pr-5 ${displaySlide === 0 ? "md:pr-5" : "md:pr-20"}`}>
               <h2 className="opacity-0 hidden md:block">Guille Ferriol</h2>
@@ -78,19 +175,19 @@ const Overlay = ({ isLoading }: Props) => {
               </h1>
               <SelectLanguage />
             </div>
-          
+
             { displaySlide === 0 && <AboutMeOverlay /> }
             { displaySlide === 1 && <ExperiencePage /> }
             { displaySlide === 2 && <SkillsPage /> }
           </section>
 
           <section className="absolute top-0 bottom-0 left-0 right-0 flex-1 flex items-center justify-between p-4">
-          {!isLoading && <Arrows onClickLeft={handleArrowClickLeft} onClickRight={handleArrowClickRight} />}
+          {!isLoading && <Arrows onClickLeft={() => go(-1)} onClickRight={() => go(1)} />}
           </section>
         </main>
     );
   };
-  
+
 
 export default Overlay
 

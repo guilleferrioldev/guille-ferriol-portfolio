@@ -10,18 +10,18 @@ const SkillsPage = () => {
     
     return (
         <section className="grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-[85%] m-5 md:m-20 mt-0 xl:mt-0 overflow-y-scroll pointer-events-auto">
-            <div className="col-span-1 xl:row-span-6 bg-coffee rounded-lg p-5 pt-0 min-h-[50vh] xl:min-h-0 md:overflow-y-scroll md:overflow-x-auto">
+            <div className="col-span-1 xl:row-span-6 bg-coffee rounded-lg p-5 pt-0 xl:min-h-0 xl:overflow-y-auto xl:overflow-x-hidden">
                 <ShowSkills skills={myLanguages} title={t("libraries")}/>
                 <ShowSkills skills={myDatabases} title={t("databases")}/>
                 <ShowSkills skills={myOthers} title={t("others")}/>
                 <ShowSkills skills={myOS} title={t("operating systems")}/>
             </div>
-            <div className="col-span-1 xl:row-span-4 bg-coffee rounded-lg p-4 min-h-[50vh] xl:min-h-0 overflow-y-auto">
+            <div className="col-span-1 xl:row-span-4 bg-coffee rounded-lg p-4 xl:min-h-0 overflow-visible xl:overflow-y-auto">
                 <TechnicalSkills />
                 <SoftSkills />
                 <AISkills />
             </div>
-            <div className="col-span-1 xl:row-span-4 bg-coffee rounded-lg min-h-[30vh]">
+            <div className="col-span-1 xl:row-span-4 bg-coffee rounded-lg relative overflow-hidden min-h-[30vh] h-[40vh] xl:h-auto">
                 <Canvas shadows className='rounded-lg'>
                     <ambientLight intensity={0.2} />
                     <directionalLight position={[10, 10, 5]} />

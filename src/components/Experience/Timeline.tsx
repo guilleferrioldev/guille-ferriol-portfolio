@@ -11,7 +11,7 @@ const Timeline = () => {
                   key={index}
                   className="grid grid-cols-[auto_1fr] items-start gap-5 rounded-lg sm:px-5 px-2.5 transition-all ease-in-out duration-500 cursor-pointer hover:bg-gray-800  group">
                   <div className="flex flex-col h-full justify-start items-center py-2">
-                    <div className="rounded-3xl w-16 h-16 p-2">
+                    <div className="rounded-3xl w-12 h-12 sm:w-16 sm:h-16 p-2">
                       <img className="w-full h-full rounded-lg" src={item.icon} alt="" />
                     </div>
 

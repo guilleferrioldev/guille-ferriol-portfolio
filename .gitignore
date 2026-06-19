@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Backup of pre-meshopt model originals (rollback safety)
+.model-originals/
